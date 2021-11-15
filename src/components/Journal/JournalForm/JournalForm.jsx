@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import { useState } from 'react';
 
 //mui imports
-import { TextField, FormControl, Select, MenuItem, Button, Stack } from '@mui/material';
+import { TextField, FormControl, Select, MenuItem, Button, Stack, InputAdornment } from '@mui/material';
 import { InputLabel } from '@mui/material';
 
 function JournalForm() {
@@ -34,7 +34,12 @@ function JournalForm() {
     return (<>
         <h1>Journal FORM!</h1>
 
-        <button onClick={() => history.push('/journal')}>Cancel</button>
+        <Button
+            variant="contained"
+            onClick={() => history.push('/journal')}
+        >
+            Cancel
+        </Button>
         <div><br /></div>
 
         <div className="formContainer">
@@ -95,7 +100,8 @@ function JournalForm() {
                     <br />
                     <TextField
                         required
-                        label="Date Caught"
+                        helperText="Date Caught"
+                        type="date"
                         value={journalInput.date}
                         onChange={(e) => setJournalInput({ ...journalInput, date: e.target.value })}
                     />
@@ -106,24 +112,34 @@ function JournalForm() {
                         alignItems="center"
                         spacing={0}
                     >
-                    <TextField
-                        required
-                        label="Length"
-                        value={journalInput.length}
-                        onChange={(e) => setJournalInput({ ...journalInput, length: e.target.value })}
-                    />
-                    <br />
-                    <TextField
-                        required
-                        label="Weight"
-                        value={journalInput.weight}
-                        onChange={(e) => setJournalInput({ ...journalInput, weight: e.target.value })}
-                    />
+                        <TextField
+                            required
+                            label="Length"
+                            type="number"
+                            helperText="in inches (in)"
+                            InputProps={{
+                                endAdornment: <InputAdornment position="end">in</InputAdornment>
+                            }}
+                            value={journalInput.length}
+                            onChange={(e) => setJournalInput({ ...journalInput, length: e.target.value })}
+                        />
+                        <br />
+                        <TextField
+                            required
+                            label="Weight"
+                            type="number"
+                            helperText="in pounds (lbs)"
+                            InputProps={{
+                                endAdornment: <InputAdornment position="end">lbs</InputAdornment>
+                            }}
+                            value={journalInput.weight}
+                            onChange={(e) => setJournalInput({ ...journalInput, weight: e.target.value })}
+                        />
                     </Stack>
                     <br />
                     <TextField
-                        required
                         label="Image URL"
+                        helperText="image URL (optional)"
                         value={journalInput.image_url}
                         onChange={(e) => setJournalInput({ ...journalInput, image_url: e.target.value })}
                     />
