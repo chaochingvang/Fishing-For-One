@@ -1,17 +1,13 @@
 import { useSelector } from "react-redux";
-import { useState } from 'react';
+import { format } from 'date-fns';
+
 
 function JournalDetails() {
 
     const journalEntry = useSelector(store => store.journal.setSelectedEntry)
-    const [isEmpty, setIsEmpty] = useState(true);
+
     console.log(journalEntry.name);
 
-    // if (journalEntry.name !== 'empty' || undefined) {
-    //     setIsEmpty(false);
-    // }
-
-    console.log(isEmpty);
 
     return (<>
         <h1>JOURNAL DETAILS</h1>
@@ -24,6 +20,11 @@ function JournalDetails() {
             :
             <>
                 {JSON.stringify(journalEntry)}
+
+                <img src={journalEntry.image_url} />
+                <h2>{journalEntry.fishName}</h2>
+                <h2>Caught with: {journalEntry.lureName}</h2>
+                <h2>Caught on: {format(new Date(journalEntry.date), 'MM-dd-yyyy')}</h2>
             </>
             }
     </>)

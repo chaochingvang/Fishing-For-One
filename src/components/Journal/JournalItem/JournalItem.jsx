@@ -37,7 +37,7 @@ function JournalItem({ journalEntry }) {
                 }}>
                 <h3>{journalEntry.name}</h3>
                 <img
-                    src={journalEntry.fish_image_url}
+                    src={journalEntry.image_url}
                     alt={journalEntry.name}
                     onClick={() => handleImgClick(journalEntry)}
                 />
