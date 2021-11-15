@@ -19,7 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import Journal from '../Journal/Journal';
+import JournalPage from '../Journal/JournalPage/JournalPage';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -78,7 +78,7 @@ function App() {
             exact
             path="/journal"
           >
-            <Journal />
+            <JournalPage />
           </ProtectedRoute>
 
           <Route
