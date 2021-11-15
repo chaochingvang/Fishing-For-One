@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import Journal from '../Journal/Journal';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -70,6 +71,14 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/journal"
+          >
+            <Journal />
           </ProtectedRoute>
 
           <Route
