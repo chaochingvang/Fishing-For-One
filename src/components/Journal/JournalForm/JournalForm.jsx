@@ -1,6 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { useState } from 'react';
+import { format } from 'date-fns';
+
+
+
 
 //mui imports
 import { TextField, FormControl, Select, MenuItem, Button, Stack, InputAdornment } from '@mui/material';
@@ -17,7 +21,7 @@ function JournalForm() {
     const initialState = {
         fish_id: ``,
         lure_id: ``,
-        date: ``,
+        date: format(new Date(), 'yyyy-MM-dd'),
         weight: ``,
         length: ``,
         image_url: ``,
@@ -25,33 +29,41 @@ function JournalForm() {
     }
     const [journalInput, setJournalInput] = useState(initialState);
 
-    const handleSubmit = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
         console.log(`clicked!`);
+
+        if ((journalInput.fish_id === ``) ||
+            (journalInput.lure_id === ``)) {
+            alert(`Please enter all the required information!`)
+        }
+
     }
 
-    console.log(fishList, lureList);
-
     return (<>
-        <h1>Journal FORM!</h1>
-
+        
         <Button
             variant="contained"
             onClick={() => history.push('/journal')}
         >
             Cancel
         </Button>
+        
+        <h1>Journal FORM!</h1>
+
+
         <div><br /></div>
 
         <div className="formContainer">
             <form onSubmit={handleSubmit}>
                 <FormControl fullWidth={true}>
-                    <InputLabel id="fish">Fish Type</InputLabel>
+                    <InputLabel id="fish">Fish Type (required *)</InputLabel>
                     <Select
                         required
                         labelId="fish"
                         id="fish-select"
                         value={journalInput.fish_id}
-                        label="Fish Type"
+                        label="Fish Type (required *)"
                         onChange={(e) => setJournalInput({ ...journalInput, fish_id: e.target.value })}
                     >
                         <MenuItem
@@ -73,13 +85,13 @@ function JournalForm() {
                 </FormControl>
                 <br />
                 <FormControl fullWidth={true}>
-                    <InputLabel id="lure">Lure Type</InputLabel>
+                    <InputLabel id="lure">Lure Type (required *)</InputLabel>
                     <Select
                         required
                         labelId="lure"
                         id="lure-select"
                         value={journalInput.lure_id}
-                        label="Lure Type"
+                        label="Lure Type (required *)"
                         onChange={(e) => setJournalInput({ ...journalInput, lure_id: e.target.value })}
                     >
                         <MenuItem
@@ -100,7 +112,7 @@ function JournalForm() {
                     <br />
                     <TextField
                         required
-                        helperText="Date Caught"
+                        helperText="Date Caught (required *)"
                         type="date"
                         value={journalInput.date}
                         onChange={(e) => setJournalInput({ ...journalInput, date: e.target.value })}
@@ -113,10 +125,9 @@ function JournalForm() {
                         spacing={0}
                     >
                         <TextField
-                            required
                             label="Length"
                             type="number"
-                            helperText="in inches (in)"
+                            helperText="in inches (in) (optional)"
                             InputProps={{
                                 endAdornment: <InputAdornment position="end">in</InputAdornment>
                             }}
@@ -125,10 +136,9 @@ function JournalForm() {
                         />
                         <br />
                         <TextField
-                            required
                             label="Weight"
                             type="number"
-                            helperText="in pounds (lbs)"
+                            helperText="in pounds (lbs) (optional)"
                             InputProps={{
                                 endAdornment: <InputAdornment position="end">lbs</InputAdornment>
                             }}
