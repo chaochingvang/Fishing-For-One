@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 import JournalItem from '../JournalItem/JournalItem';
+import './JournalList.css';
 
 function JournalList() {
     const dispatch = useDispatch();
@@ -18,14 +19,14 @@ function JournalList() {
     return (<>
         <h1>Journal List!</h1>
 
-        {JSON.stringify(journalList)}
-
+        <div className="journals">
         {journalList?.map(journal => (
             <JournalItem
                 key={journal.id}
                 journal={journal}
             />
         ))}
+        </div>
     </>)
 }
 
