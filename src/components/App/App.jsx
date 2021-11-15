@@ -21,6 +21,8 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import JournalPage from '../Journal/JournalPage/JournalPage';
 import JournalDetails from '../Journal/JournalDetails/JournalDetails';
+import JournalForm from "../Journal/JournalForm/JournalForm";
+
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -36,6 +38,8 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'FETCH_USER' });
+    dispatch({ type: 'FETCH_FISH' });
+    dispatch({ type: `FETCH_LURE` });
   }, [dispatch]);
 
   return (
@@ -75,7 +79,7 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
-          {/* ////////// JOURNAL PAGES //////////// */}
+          {/* ////////// JOURNAL PAGES //////////// */ }
           <ProtectedRoute
             exact
             path="/journal"
@@ -85,11 +89,18 @@ function App() {
 
           <ProtectedRoute
             exact
+            path="/journal/form"
+          >
+            <JournalForm />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
             path="/journal/details"
           >
             <JournalDetails />
           </ProtectedRoute>
-
+          {/* ////////// END JOURNAL PAGES //////////// */}
           <Route
             exact
             path="/login"

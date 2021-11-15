@@ -1,15 +1,14 @@
 import JournalList from "../JournalList/JournalList";
-import JournalItem from "../JournalItem/JournalItem";
-import JournalForm from "../JournalForm/JournalForm";
+import { useHistory } from "react-router";
 
 
 function JournalPage() {
-
+    const history = useHistory();
 
     return (<>
-        <h1>JOURNAL PAGE!</h1>
 
-        <button>Add A New Entry</button>
+
+        <button onClick={() => history.push('/journal/form') }>Add A New Entry</button>
 
         <JournalList />
 
