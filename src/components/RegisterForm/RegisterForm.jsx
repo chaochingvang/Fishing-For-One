@@ -2,22 +2,44 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 function RegisterForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
+  //initial state of registration info
+  const initialState = {
+    username: '',
+    password: '',
+    confirmPassword: '',
+    email: ''
+  }
+  
+  const [newUser, setNewUser] = useState(initialState);
+
+
+
+
   const registerUser = (event) => {
     event.preventDefault();
-
-    dispatch({
-      type: 'REGISTER',
-      payload: {
-        username: username,
-        password: password,
-      },
-    });
+    
+    //checks if user has enter the same password twice
+    //dispatch registration if pw is correct
+    if (newUser.password === newUser.confirmPassword) {
+      dispatch({
+        type: 'REGISTER',
+        payload: {
+          username: newUser.username,
+          password: newUser.password,
+          email: newUser.email,
+        },
+      });
+      //if not, reset pw input and prompt user to re-enter both pw
+    } else {
+      alert(`Passwords don't match! Please re-enter matching passwords.`);
+      setNewUser({...newUser, password: '', confirmPassword: ''})
+    }
   }; // end registerUser
+
+  console.log(newUser);
 
   return (
     <form className="formPanel" onSubmit={registerUser}>
@@ -33,9 +55,9 @@ function RegisterForm() {
           <input
             type="text"
             name="username"
-            value={username}
+            value={newUser.username}
             required
-            onChange={(event) => setUsername(event.target.value)}
+            onChange={(event) => setNewUser({...newUser, username: event.target.value})}
           />
         </label>
       </div>
@@ -45,9 +67,33 @@ function RegisterForm() {
           <input
             type="password"
             name="password"
-            value={password}
+            value={newUser.password}
             required
-            onChange={(event) => setPassword(event.target.value)}
+            onChange={(event) => setNewUser({...newUser, password: event.target.value})}
+          />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="confirmPassword">
+          Re-enter Password:
+          <input
+            type="password"
+            name="confirmPassword"
+            value={newUser.confirmPassword}
+            required
+            onChange={(event) => setNewUser({...newUser, confirmPassword: event.target.value})}
+          />
+        </label>
+      </div>
+      <div>
+        <label htmlFor="email">
+          Email:
+          <input
+            type="text"
+            name="email"
+            value={newUser.email}
+            required
+            onChange={(event) => setNewUser({ ...newUser, email: event.target.value })}
           />
         </label>
       </div>
