@@ -20,12 +20,14 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import JournalPage from '../Journal/JournalPage/JournalPage';
+import JournalDetails from '../Journal/JournalDetails/JournalDetails';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import './App.css';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -73,12 +75,19 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
+          {/* ////////// JOURNAL PAGES //////////// */}
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
             exact
             path="/journal"
           >
             <JournalPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/journal/details"
+          >
+            <JournalDetails />
           </ProtectedRoute>
 
           <Route

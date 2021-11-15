@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-
+import { useHistory } from 'react-router';
 import JournalDetails from '../JournalDetails/JournalDetails';
 
 
@@ -8,12 +8,16 @@ import { Box } from '@mui/material'
 import Card from '@mui/material/Card';
 
 
-function JournalItem({ journal }) {
+
+function JournalItem({ journalEntry }) {
     const dispatch = useDispatch();
+    const history = useHistory();
 
+    const handleImgClick =(journalEntry) => {
+        console.log(`this is selected entry`, journalEntry);
 
-    const handleImgClick =(journal) => {
-        console.log(journal);
+        dispatch({ type: `SET_SELECTED_ENTRY`, payload: journalEntry });
+        history.push('/journal/details');
     }
 
     return (<>
@@ -31,11 +35,11 @@ function JournalItem({ journal }) {
                     margin: 'auto',
                     backgroundColor: '#b2dfdb'
                 }}>
-                <h3>{journal.name}</h3>
+                <h3>{journalEntry.name}</h3>
                 <img
-                    src={journal.fish_image_url}
-                    alt={journal.name}
-                    onClick={() => handleImgClick(journal)}
+                    src={journalEntry.fish_image_url}
+                    alt={journalEntry.name}
+                    onClick={() => handleImgClick(journalEntry)}
                 />
             </Card>
         </Box>

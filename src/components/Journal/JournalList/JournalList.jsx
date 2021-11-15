@@ -14,16 +14,16 @@ function JournalList() {
 
     const journalList = useSelector(store => store.journal.setJournal);
 
-    console.log(`this is journal`, journalList);
+    console.log(`this is journalList`, journalList);
 
     return (<>
         <h1>Journal List!</h1>
 
         <div className="journals">
-        {journalList?.map(journal => (
+        {journalList?.map(journalEntry => (
             <JournalItem
-                key={journal.id}
-                journal={journal}
+                key={journalEntry.id}
+                journalEntry={journalEntry}
             />
         ))}
         </div>
