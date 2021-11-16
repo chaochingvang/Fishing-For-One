@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-import { Button, Box, Card, TextField, Autocomplete } from '@mui/material';
+import { Button, Box, Card, TextField, Autocomplete, InputAdornment } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import Search from "@mui/icons-material/Search";
 
 function FishPage() {
     const fishList = useSelector(store => store.fish.fishList);
     const [selectedIndex, setSelectedIndex] = useState(0);
-    const [searchItem, setSearchItem] = useState('');
 
     //adding labels into each fish in fishList to allow for autocomplete search
-    const searchFishList = fishList.map(fish => ({...fish, label: fish.name}))
+    const searchFishList = fishList.map(fish => ({ ...fish, label: fish.name }))
+
+    const [searchItem, setSearchItem] = useState(searchFishList[selectedIndex]);
+
+
 
     const handleBack = () => {
         console.log(`clicked back`);
@@ -31,21 +36,33 @@ function FishPage() {
         }
     }
 
-    //find index of fish with fish.id = 3
-    console.log(`findIndex`, fishList.findIndex(fish => fish.id === 3));
-    console.log(searchFishList);
+    //handle search option change
+    const handleChange = (newValue) => {
+        if (newValue !== null) {
+            const index = searchFishList.findIndex(fish => fish.id === newValue.id);
+            setSelectedIndex(index);
+        }
+        else {
+            return;
+        }
+    }
+
 
     return (<>
+        
         <h1>Fish Page</h1>
 
         <Autocomplete
             disablePortal
+            value={searchItem}
             id="combo-box-demo"
+            isOptionEqualToValue={(option, value) => option.id === value.id}
             options={searchFishList}
             sx={{ width: 300 }}
-            renderInput={(params) => <TextField {...params} label="Fish" />}
-            // onChange returns the index of the selection
-            onChange={(event) => console.log(event.target.__reactProps$zwb4i86qv["data-option-index"])}
+            
+            renderInput={(params) => <TextField {...params} InputProps={{ ...params.InputProps, startAdornment: (<><InputAdornment position="start"><SearchIcon /></InputAdornment> {params.InputProps.startAdornment}</>) }} label="Fish" />}
+            // newValue is the value of the option selected
+            onChange={(event, newValue) => handleChange(newValue)}
         />
 
         <table style={{
