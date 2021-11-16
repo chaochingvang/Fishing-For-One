@@ -12,7 +12,7 @@ function JournalList() {
         dispatch({ type: `FETCH_JOURNAL` });
     }, [])
 
-    const journalList = useSelector(store => store.journal.setJournal);
+    const journalList = useSelector(store => store.journal.journalList);
 
     console.log(`this is journalList`, journalList);
 

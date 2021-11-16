@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-const setLure = (state = [], action) => {
+const lureList = (state = [], action) => {
     switch (action.type) {
         case 'SET_LURE':
             return action.payload;
@@ -10,5 +10,5 @@ const setLure = (state = [], action) => {
 }
 
 export default combineReducers({
-    setLure,
+    lureList,
 });

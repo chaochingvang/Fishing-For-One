@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-const setJournal = (state = [], action) => {
+const journalList = (state = [], action) => {
     switch (action.type) {
         case 'SET_JOURNAL':
             return action.payload;
@@ -9,7 +9,7 @@ const setJournal = (state = [], action) => {
     }
 }
 
-const setSelectedEntry = (state = {name: 'empty'}, action) => {
+const selectedEntry = (state = {name: 'empty'}, action) => {
     switch (action.type) {
         case 'SET_SELECTED_ENTRY':
             return action.payload;
@@ -19,6 +19,6 @@ const setSelectedEntry = (state = {name: 'empty'}, action) => {
 }
 
 export default combineReducers({
-    setJournal,
-    setSelectedEntry,
+    journalList,
+    selectedEntry,
 });

@@ -4,8 +4,6 @@ import { useState } from 'react';
 import { format } from 'date-fns';
 
 
-
-
 //mui imports
 import { TextField, FormControl, Select, MenuItem, Button, Stack, InputAdornment } from '@mui/material';
 import { InputLabel } from '@mui/material';
@@ -15,9 +13,11 @@ function JournalForm() {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    const fishList = useSelector(store => store.fish.setFish);
-    const lureList = useSelector(store => store.lure.setLure);
+    //grabbing reducers from store
+    const fishList = useSelector(store => store.fish.fishList);
+    const lureList = useSelector(store => store.lure.lureList);
 
+    //setting initial state with empty fields and today's date as initial date value
     const initialState = {
         fish_id: ``,
         lure_id: ``,

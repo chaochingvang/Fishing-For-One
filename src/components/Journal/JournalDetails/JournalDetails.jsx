@@ -6,7 +6,7 @@ import { useHistory } from "react-router";
 function JournalDetails() {
 
     const history = useHistory();
-    const journalEntry = useSelector(store => store.journal.setSelectedEntry)
+    const journalEntry = useSelector(store => store.journal.selectedEntry)
 
     console.log(journalEntry.name);
 

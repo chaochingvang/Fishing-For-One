@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-const setFish = (state = [], action) => {
+const fishList = (state = [], action) => {
     switch (action.type) {
         case 'SET_FISH':
             return action.payload;
@@ -10,5 +10,5 @@ const setFish = (state = [], action) => {
 }
 
 export default combineReducers({
-    setFish,
+    fishList,
 });
