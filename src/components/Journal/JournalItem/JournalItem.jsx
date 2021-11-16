@@ -13,7 +13,7 @@ function JournalItem({ journalEntry }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const handleImgClick =(journalEntry) => {
+    const handleCardClick =(journalEntry) => {
         console.log(`this is selected entry`, journalEntry);
 
         dispatch({ type: `SET_SELECTED_ENTRY`, payload: journalEntry });
@@ -28,6 +28,7 @@ function JournalItem({ journalEntry }) {
             padding: '1em'
         }}>
             <Card
+                onClick={() => handleCardClick(journalEntry)}
                 variant="outlined"
                 sx={{
                     width: '100%',
@@ -39,7 +40,7 @@ function JournalItem({ journalEntry }) {
                 <img
                     src={journalEntry.image_url}
                     alt={journalEntry.name}
-                    onClick={() => handleImgClick(journalEntry)}
+                    
                 />
             </Card>
         </Box>

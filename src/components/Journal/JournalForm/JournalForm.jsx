@@ -19,13 +19,13 @@ function JournalForm() {
 
     //setting initial state with empty fields and today's date as initial date value
     const initialState = {
-        fish_id: ``,
-        lure_id: ``,
+        fish_id: '',
+        lure_id: '',
         date: format(new Date(), 'yyyy-MM-dd'),
-        weight: ``,
-        length: ``,
-        image_url: ``,
-        comments: ``,
+        weight: '',
+        length: '',
+        image_url: '',
+        comments: '',
     }
     const [journalInput, setJournalInput] = useState(initialState);
 
@@ -36,6 +36,11 @@ function JournalForm() {
         if ((journalInput.fish_id === ``) ||
             (journalInput.lure_id === ``)) {
             alert(`Please enter all the required information!`)
+        }
+        else {
+            console.log(journalInput.image_url);
+            
+            dispatch({ type: `ADD_NEW_ENTRY`, payload: {journalInput, history} });
         }
 
     }
