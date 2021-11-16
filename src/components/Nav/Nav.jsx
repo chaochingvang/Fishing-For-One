@@ -44,6 +44,10 @@ function Nav() {
               Lure
             </Link>
 
+            <Link className="navLink" to="/admin">
+              Admin
+            </Link>
+
             <LogOutButton className="navLink" />
           </>
         )}

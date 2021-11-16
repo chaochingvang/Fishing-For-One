@@ -24,6 +24,7 @@ import JournalDetails from '../Journal/JournalDetails/JournalDetails';
 import JournalForm from "../Journal/JournalForm/JournalForm";
 import FishPage from '../Fish/FishPage';
 import LurePage from '../Lure/LurePage';
+import AdminPage from '../Admin/AdminPage/AdminPage';
 
 
 import '@fontsource/roboto/300.css';
@@ -42,6 +43,7 @@ function App() {
     dispatch({ type: 'FETCH_USER' });
     dispatch({ type: 'FETCH_FISH' });
     dispatch({ type: `FETCH_LURE` });
+    dispatch({ type: `FETCH_JOURNAL` });
   }, [dispatch]);
 
   return (
@@ -81,8 +83,16 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
-          {/* ////////// FISH PAGES //////////// */}
-          
+          {/* ////////// ADMIN PAGE //////////// */}
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/admin"
+          >
+            <AdminPage />
+          </ProtectedRoute>
+
+          {/* ////////// FISH PAGE //////////// */}       
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
@@ -90,8 +100,9 @@ function App() {
           >
             <FishPage />
           </ProtectedRoute>
-          {/* ////////// LURE PAGES //////////// */}
-          
+
+
+          {/* ////////// LURE PAGE //////////// */}
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
@@ -99,7 +110,6 @@ function App() {
           >
             <LurePage />
           </ProtectedRoute>
-
 
 
           {/* ////////// JOURNAL PAGES //////////// */ }
@@ -124,6 +134,8 @@ function App() {
             <JournalDetails />
           </ProtectedRoute>
           {/* ////////// END JOURNAL PAGES //////////// */}
+
+
           <Route
             exact
             path="/login"
@@ -145,7 +157,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/journal" />
               :
               // Otherwise, show the registration page
               <RegisterPage />
@@ -159,7 +171,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/journal" />
               :
               // Otherwise, show the Landing page
               <LandingPage />

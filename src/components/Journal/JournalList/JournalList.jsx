@@ -1,16 +1,9 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 import JournalItem from '../JournalItem/JournalItem';
 import './JournalList.css';
 
 function JournalList() {
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch({ type: `FETCH_JOURNAL` });
-    }, [])
 
     const journalList = useSelector(store => store.journal.journalList);
 
