@@ -62,7 +62,7 @@ function FishPage() {
 
             <Autocomplete
                 disablePortal
-                value={searchItem}
+                // value={searchItem}
                 id="combo-box-demo"
                 isOptionEqualToValue={(option, value) => option.id === value.id}
                 options={searchFishList}

@@ -22,8 +22,8 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import JournalPage from '../Journal/JournalPage/JournalPage';
 import JournalDetails from '../Journal/JournalDetails/JournalDetails';
 import JournalForm from "../Journal/JournalForm/JournalForm";
-import FishPage from '../Fish/FishPage/FishPage';
-import LurePage from '../Lure/LurePage/LurePage';
+import FishPage from '../Fish/FishPage';
+import LurePage from '../Lure/LurePage';
 
 
 import '@fontsource/roboto/300.css';
