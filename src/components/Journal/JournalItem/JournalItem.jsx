@@ -1,11 +1,11 @@
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
-import JournalDetails from '../JournalDetails/JournalDetails';
+
 
 
 //mui imports
-import { Box } from '@mui/material'
-import Card from '@mui/material/Card';
+import { Box, Card } from '@mui/material'
+
 
 
 
@@ -22,8 +22,8 @@ function JournalItem({ journalEntry }) {
 
     return (<>
         <Box sx={{
-            width: 300,
-            height: 300,
+            width: '50%',
+            // height: 300,
             margin: 'auto',
             padding: '1em'
         }}>
