@@ -5,6 +5,9 @@ import { Button, Box, Card, TextField, Autocomplete, InputAdornment } from '@mui
 import SearchIcon from '@mui/icons-material/Search';
 import Search from "@mui/icons-material/Search";
 
+import './FishPage.css';
+import { textAlign } from "@mui/system";
+
 function FishPage() {
     const fishList = useSelector(store => store.fish.fishList);
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -49,65 +52,67 @@ function FishPage() {
 
 
     return (<>
-        
-        <h1>Fish Page</h1>
+        <div className="fishPage">
+            <h1>Fish Page</h1>
 
-        <Autocomplete
-            disablePortal
-            value={searchItem}
-            id="combo-box-demo"
-            isOptionEqualToValue={(option, value) => option.id === value.id}
-            options={searchFishList}
-            sx={{ width: 300 }}
-            
-            renderInput={(params) => <TextField {...params} InputProps={{ ...params.InputProps, startAdornment: (<><InputAdornment position="start"><SearchIcon /></InputAdornment> {params.InputProps.startAdornment}</>) }} label="Fish" />}
-            // newValue is the value of the option selected
-            onChange={(event, newValue) => handleChange(newValue)}
-        />
+            <Autocomplete
+                disablePortal
+                value={searchItem}
+                id="combo-box-demo"
+                isOptionEqualToValue={(option, value) => option.id === value.id}
+                options={searchFishList}
+                sx={{
+                    width: '80%',
+                    margin: 'auto',
+                }}
 
-        <table style={{
-            textAlign: "center"
-        }}>
-            <tbody style={{ border: "1px solid black" }}>
-                <tr style={{ border: "1px solid black" }}>
-                    <td>
-                        <Button
-                            variant="contained"
-                            onClick={handleBack}
-                        >
-                            Back
-                        </Button>
-                    </td>
-                    <td style={{
-                        border: "1px solid black",
-                        width: '100%'
-                    }}>
-                        <Card variant="outlined"
-                            sx={{
-                                width: '100%',
-                                height: '100%',
-                                margin: 'auto',
-                                backgroundColor: '#b2dfdb'
-                            }}>
-                            <img src={fishList[selectedIndex]?.image_url} />
-                            <h3>{fishList[selectedIndex]?.id}</h3>
-                            <h3>{fishList[selectedIndex]?.name}</h3>
-                            <h5>{fishList[selectedIndex]?.description}</h5>
-                        </Card>
-                    </td>
-                    <td>
-                        <Button
-                            variant="contained"
-                            onClick={handleNext}
-                        >
-                            Next
-                        </Button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                renderInput={(params) => <TextField {...params} InputProps={{ ...params.InputProps, startAdornment: (<><InputAdornment position="start"><SearchIcon /></InputAdornment> {params.InputProps.startAdornment}</>) }} label="Fish" />}
+                // newValue is the value of the option selected
+                onChange={(event, newValue) => handleChange(newValue)}
+            />
 
-        {JSON.stringify(fishList)}
+            <table style={{
+                textAlign: "center"
+            }}>
+                <tbody style={{ border: "1px solid black" }}>
+                    <tr style={{ border: "1px solid black" }}>
+                        <td>
+                            <Button
+                                variant="contained"
+                                onClick={handleBack}
+                            >
+                                Back
+                            </Button>
+                        </td>
+                        <td style={{
+                            border: "1px solid black",
+                            width: '100%'
+                        }}>
+                            <Card variant="outlined"
+                                sx={{
+                                    width: '100%',
+                                    height: '100%',
+                                    margin: 'auto',
+                                    backgroundColor: '#b2dfdb'
+                                }}>
+                                <img src={fishList[selectedIndex]?.image_url} />
+                                <h3>{fishList[selectedIndex]?.id}</h3>
+                                <h3>{fishList[selectedIndex]?.name}</h3>
+                                <h5>{fishList[selectedIndex]?.description}</h5>
+                            </Card>
+                        </td>
+                        <td>
+                            <Button
+                                variant="contained"
+                                onClick={handleNext}
+                            >
+                                Next
+                            </Button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </>)
 }
 export default FishPage;
