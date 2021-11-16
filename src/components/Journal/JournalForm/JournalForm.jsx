@@ -8,6 +8,8 @@ import { format } from 'date-fns';
 import { TextField, FormControl, Select, MenuItem, Button, Stack, InputAdornment } from '@mui/material';
 import { InputLabel } from '@mui/material';
 
+import './JournalForm.css';
+
 function JournalForm() {
 
     const history = useHistory();
@@ -54,8 +56,9 @@ function JournalForm() {
             Cancel
         </Button>
         
-        <h1>Journal FORM!</h1>
-
+        <div className="header">
+            <h1>Journal FORM!</h1>
+        </div>
 
         <div><br /></div>
 
