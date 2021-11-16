@@ -159,6 +159,15 @@ function JournalForm() {
                         onChange={(e) => setJournalInput({ ...journalInput, image_url: e.target.value })}
                     />
                     <br />
+                    <TextField
+                        multiline
+                        maxRows={3}
+                        label="Additional Notes"
+                        helperText="Additional Notes (optional)"
+                        value={journalInput.comments}
+                        onChange={(e) => setJournalInput({ ...journalInput, comments: e.target.value })}
+                    />
+                    <br />
                     <Button
                         type="submit"
                         variant="contained"
