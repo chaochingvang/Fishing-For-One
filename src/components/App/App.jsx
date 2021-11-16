@@ -23,6 +23,7 @@ import JournalPage from '../Journal/JournalPage/JournalPage';
 import JournalDetails from '../Journal/JournalDetails/JournalDetails';
 import JournalForm from "../Journal/JournalForm/JournalForm";
 import FishPage from '../Fish/FishPage/FishPage';
+import LurePage from '../Lure/LurePage/LurePage';
 
 
 import '@fontsource/roboto/300.css';
@@ -88,6 +89,15 @@ function App() {
             path="/fish"
           >
             <FishPage />
+          </ProtectedRoute>
+          {/* ////////// LURE PAGES //////////// */}
+          
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/lure"
+          >
+            <LurePage />
           </ProtectedRoute>
 
 

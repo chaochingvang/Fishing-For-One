@@ -1,28 +1,28 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-import { Button, Box, Card, TextField, Autocomplete, InputAdornment } from '@mui/material';
+import { Button, Card, TextField, Autocomplete, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 
-import './FishPage.css';
+import './LurePage.css';
 
 
-function FishPage() {
-    const fishList = useSelector(store => store.fish.fishList);
+function LurePage() {
+    const lureList = useSelector(store => store.lure.lureList);
     const [selectedIndex, setSelectedIndex] = useState(0);
 
     //adding labels into each fish in fishList to allow for autocomplete search
-    const searchFishList = fishList.map(fish => ({ ...fish, label: fish.name }))
+    const searchLureList = lureList.map(lure => ({ ...lure, label: lure.name }))
 
-    const [searchItem, setSearchItem] = useState(searchFishList[selectedIndex]);
+    const [searchItem, setSearchItem] = useState(searchLureList[selectedIndex]);
 
 
 
     const handleBack = () => {
         console.log(`clicked back`);
         if (selectedIndex === 0) {
-            setSelectedIndex(fishList.length - 1)
+            setSelectedIndex(lureList.length - 1)
         }
         else {
             setSelectedIndex(selectedIndex - 1);
@@ -31,7 +31,7 @@ function FishPage() {
 
     const handleNext = () => {
         console.log(`clicked next`);
-        if (selectedIndex === fishList.length - 1) {
+        if (selectedIndex === lureList.length - 1) {
             setSelectedIndex(0);
         }
         else {
@@ -42,7 +42,7 @@ function FishPage() {
     //handle search option change
     const handleChange = (newValue) => {
         if (newValue !== null) {
-            const index = searchFishList.findIndex(fish => fish.id === newValue.id);
+            const index = searchLureList.findIndex(lure => lure.id === newValue.id);
             setSelectedIndex(index);
         }
         else {
@@ -52,21 +52,21 @@ function FishPage() {
 
 
     return (<>
-        <div className="fishPage">
-            <h1>Fish Page</h1>
+        <div className="lurePage">
+            <h1>Lure Page</h1>
 
             <Autocomplete
                 disablePortal
                 value={searchItem}
                 id="combo-box-demo"
                 isOptionEqualToValue={(option, value) => option.id === value.id}
-                options={searchFishList}
+                options={searchLureList}
                 sx={{
                     width: '80%',
                     margin: 'auto',
                 }}
 
-                renderInput={(params) => <TextField {...params} InputProps={{ ...params.InputProps, startAdornment: (<><InputAdornment position="start"><SearchIcon /></InputAdornment> {params.InputProps.startAdornment}</>) }} label="Fish" />}
+                renderInput={(params) => <TextField {...params} InputProps={{ ...params.InputProps, startAdornment: (<><InputAdornment position="start"><SearchIcon /></InputAdornment> {params.InputProps.startAdornment}</>) }} label="Lure" />}
                 // newValue is the value of the option selected
                 onChange={(event, newValue) => handleChange(newValue)}
             />
@@ -94,10 +94,10 @@ function FishPage() {
                                     margin: 'auto',
                                     backgroundColor: '#b2dfdb'
                                 }}>
-                                <img src={fishList[selectedIndex]?.image_url} />
-                                <h3>{fishList[selectedIndex]?.id}</h3>
-                                <h3>{fishList[selectedIndex]?.name}</h3>
-                                <h5>{fishList[selectedIndex]?.description}</h5>
+                                <img src={lureList[selectedIndex]?.image_url} />
+                                <h3>{lureList[selectedIndex]?.id}</h3>
+                                <h3>{lureList[selectedIndex]?.name}</h3>
+                                <h5>{lureList[selectedIndex]?.description}</h5>
                             </Card>
                         </td>
                         <td>
@@ -114,4 +114,4 @@ function FishPage() {
         </div>
     </>)
 }
-export default FishPage;
+export default LurePage;

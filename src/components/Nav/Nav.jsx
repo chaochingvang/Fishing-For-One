@@ -39,6 +39,10 @@ function Nav() {
             <Link className="navLink" to="/fish">
               Fish
             </Link>
+            
+            <Link className="navLink" to="/lure">
+              Lure
+            </Link>
 
             <LogOutButton className="navLink" />
           </>
