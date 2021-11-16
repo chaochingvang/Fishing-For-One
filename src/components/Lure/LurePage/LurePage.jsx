@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-
+import { useSwipeable } from 'react-swipeable';
 import { Button, Card, TextField, Autocomplete, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -17,7 +17,12 @@ function LurePage() {
 
     const [searchItem, setSearchItem] = useState(searchLureList[selectedIndex]);
 
-
+    const handlers = useSwipeable({
+        onSwipedLeft: () => handleNext(),
+        onSwipedRight: () => handleBack(),
+        preventDefaultTouchmoveEvent: true,
+        trackMouse: true
+    });
 
     const handleBack = () => {
         console.log(`clicked back`);
@@ -87,7 +92,9 @@ function LurePage() {
                         <td style={{
                             width: '100%'
                         }}>
-                            <Card variant="outlined"
+                            <Card
+                                {...handlers}
+                                variant="outlined"
                                 sx={{
                                     width: '100%',
                                     height: '100%',
