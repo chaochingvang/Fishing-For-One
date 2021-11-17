@@ -14,9 +14,9 @@ function* fetchJournal() {
 function* addNewEntry(action) {
     try {
         console.log(action.payload);
-        axios.post('/api/journal', action.payload.journalInput);
+        yield axios.post('/api/journal', action.payload.journalInput);
         yield put({ type: `FETCH_JOURNAL`});
-        action.payload.history.push('/journal');
+        yield action.payload.history.push('/journal');
     } catch (err) {
         console.error(err);
         yield put({ type: `ERROR_ADD_NEW_ENTRY` });

@@ -91,7 +91,6 @@ function App() {
 
           {/* ////////// ADMIN PAGE //////////// */}
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
             exact
             path="/admin"
           >
@@ -99,7 +98,6 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
             exact
             path="/admin/fish"
           >
@@ -107,7 +105,6 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
             exact
             path="/admin/fish/edit"
           >
@@ -115,7 +112,6 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
             exact
             path="/admin/fish/form"
           >
@@ -123,7 +119,6 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
             exact
             path="/admin/lure"
           >
@@ -132,7 +127,6 @@ function App() {
 
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
             exact
             path="/admin/lure/edit"
           >
@@ -140,7 +134,6 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
             exact
             path="/admin/lure/form"
           >
@@ -149,7 +142,6 @@ function App() {
 
           {/* ////////// FISH PAGE //////////// */}       
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
             exact
             path="/fish"
           >
@@ -159,7 +151,6 @@ function App() {
 
           {/* ////////// LURE PAGE //////////// */}
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
             exact
             path="/lure"
           >
