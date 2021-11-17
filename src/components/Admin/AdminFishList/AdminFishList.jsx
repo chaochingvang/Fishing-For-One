@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 //mui
 import { TableContainer, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 
+
 function AdminFishList() {
     const fishList = useSelector(store => store.fish.fishList);
-
 
     return (<>
         <h1>Admin FIsh List</h1>

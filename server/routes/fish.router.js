@@ -29,9 +29,28 @@ router.post('/', (req, res) => {
     // POST route code here
 });
 
+//DELETE ROUTE 
 router.delete(`/:id`, (req, res) => {
     console.log(`in /fish DELETE router`);
     console.log(req.params.id);
+
+    const id = req.params.id;
+    const values = [id];
+    const queryText = `
+        DELETE FROM "fish_list"
+        WHERE "id" = $1;
+    `;
+
+    pool
+        .query(queryText, values)
+        .then((result) => {
+            console.log(`successfully deleted fish ID #`, id);
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.log(`ERRROR! /fish/:id DELETE router`, err);
+            res.sendStatus(500);
+        })
 })
 
 module.exports = router;
