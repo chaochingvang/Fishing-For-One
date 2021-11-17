@@ -26,9 +26,11 @@ import FishPage from '../Fish/FishPage';
 import LurePage from '../Lure/LurePage';
 import AdminPage from '../Admin/AdminPage/AdminPage';
 import AdminFishList from '../Admin/AdminFishList/AdminFishList';
-import AdminLureList from '../Admin/AdminLureList/AdminLureList';
 import AdminFishEdit from '../Admin/AdminFishEdit/AdminFishEdit';
 import AdminFishForm from '../Admin/AdminFishForm/AdminFishForm';
+import AdminLureList from '../Admin/AdminLureList/AdminLureList';
+import AdminLureEdit from '../Admin/AdminLureEdit/AdminLureEdit';
+import AdminLureForm from '../Admin/AdminLureForm/AdminLureForm';
 
 
 import '@fontsource/roboto/300.css';
@@ -126,6 +128,23 @@ function App() {
             path="/admin/lure"
           >
             <AdminLureList />
+          </ProtectedRoute>
+
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/admin/lure/edit"
+          >
+            <AdminLureEdit />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/admin/lure/form"
+          >
+            <AdminLureForm />
           </ProtectedRoute>
 
           {/* ////////// FISH PAGE //////////// */}       

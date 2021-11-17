@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 import { TextField, FormControl, Button } from '@mui/material';
 import { useState } from 'react';
 
-function AdminFishForm() {
+function AdminLureForm() {
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -14,27 +14,27 @@ function AdminFishForm() {
         image_url: ``,
     }
 
-    const [fishInput, setFishInput] = useState(defaultState);
+    const [lureInput, setLureInput] = useState(defaultState);
 
 
     const handleSubmit = () => {
         console.log(`clicked`);
 
-        if ((fishInput.name === ``) ||
-            (fishInput.description === ``) ||
-            (fishInput.image_url === ``)) {
+        if ((lureInput.name === ``) ||
+            (lureInput.description === ``) ||
+            (lureInput.image_url === ``)) {
             alert(`Please enter all fields`);
         }
         else {
-            dispatch({ type: `ADD_FISH`, payload: { fishInput, history } });
+            dispatch({ type: `ADD_LURE`, payload: { lureInput, history } });
         }
 
     }
 
-    console.log(fishInput);
+    console.log(lureInput);
 
     return (<>
-        <h1>Admin Fish FOrm</h1>
+        <h1>Admin Lure FOrm</h1>
 
         <div className="formContainer">
             <form onSubmit={handleSubmit}>
@@ -44,8 +44,8 @@ function AdminFishForm() {
                         helperText="Name (* required)"
                         placeholder="Name"
                         type="text"
-                        value={fishInput.name}
-                        onChange={(e) => setFishInput({ ...fishInput, name: e.target.value })}
+                        value={lureInput.name}
+                        onChange={(e) => setLureInput({ ...lureInput, name: e.target.value })}
                     />
                     <TextField
                         required
@@ -55,16 +55,16 @@ function AdminFishForm() {
                         helperText="Description (* required)"
                         placeholder="Description"
                         type="text"
-                        value={fishInput.description}
-                        onChange={(e) => setFishInput({ ...fishInput, description: e.target.value })}
+                        value={lureInput.description}
+                        onChange={(e) => setLureInput({ ...lureInput, description: e.target.value })}
                     />
                     <TextField
                         required
                         helperText="Image URL (* required)"
                         placeholder="Image URL"
                         type="text"
-                        value={fishInput.image_url}
-                        onChange={(e) => setFishInput({ ...fishInput, image_url: e.target.value })}
+                        value={lureInput.image_url}
+                        onChange={(e) => setLureInput({ ...lureInput, image_url: e.target.value })}
                     />
                     <Button
                         variant="contained"
@@ -78,4 +78,4 @@ function AdminFishForm() {
     </>)
 }
 
-export default AdminFishForm
+export default AdminLureForm

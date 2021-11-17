@@ -9,7 +9,10 @@ router.get('/', (req, res) => {
     // GET route code here
     console.log('in /lure GET router');
 
-    let queryText = `SELECT * FROM "lure_list";`;
+    let queryText = `
+        SELECT * FROM "lure_list"
+        ORDER BY "id";
+    `;
 
     pool
         .query(queryText)
@@ -27,6 +30,71 @@ router.get('/', (req, res) => {
  */
 router.post('/', (req, res) => {
     // POST route code here
+    console.log(`in /lure POST router`);
+    const values = [req.body.name, req.body.description, req.body.image_url];
+    const queryText = `
+        INSERT INTO "lure_list" ("name", "description", "image_url")
+        VALUES ($1, $2, $3)
+    `;
+
+    pool
+        .query(queryText, values)
+        .then((result) => {
+            console.log(`successfully added new lure`);
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.error(`ERROR! /lure POST router`);
+            res.sendStatus(500);
+        })
+
 });
 
+//DELETE ROUTE 
+router.delete(`/:id`, (req, res) => {
+    console.log(`in /lure DELETE router`);
+    console.log(req.params.id);
+
+    const id = req.params.id;
+    const values = [id];
+    const queryText = `
+        DELETE FROM "lure_list"
+        WHERE "id" = $1;
+    `;
+
+    pool
+        .query(queryText, values)
+        .then((result) => {
+            console.log(`successfully deleted lure ID #`, id);
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.error(`ERROR! /lure/:id DELETE router`, err);
+            res.sendStatus(500);
+        })
+})
+
+//PUT ROUTE
+router.put(`/:id`, (req, res) => {
+    console.log(`in /lure PUT router`);
+    const values = [req.body.name, req.body.description, req.body.image_url, req.params.id];
+    const queryText = `
+        UPDATE "lure_list"
+        SET "name" = $1,
+        "description" = $2,
+        "image_url" = $3
+        WHERE "id" = $4;
+    `;
+
+    pool
+        .query(queryText, values)
+        .then((result) => {
+            console.log(`successfully updated lure ID#`, req.params.id);
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.error(`ERROR! /lure/:id PUT router`, err);
+            res.sendStatus(500);
+        });
+})
 module.exports = router;

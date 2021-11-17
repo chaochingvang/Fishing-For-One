@@ -9,6 +9,16 @@ const lureList = (state = [], action) => {
     }
 }
 
+const selectedLure = (state = { status: 'empty' }, action) => {
+    switch (action.type) {
+        case 'SELECTED_LURE':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     lureList,
+    selectedLure,
 });

@@ -9,7 +9,10 @@ router.get('/', (req, res) => {
     // GET route code here
     console.log('in /fish GET router');
 
-    let queryText = `SELECT * FROM "fish_list";`;
+    let queryText = `
+        SELECT * FROM "fish_list"
+        ORDER BY "id";
+    `;
 
     pool
         .query(queryText)
