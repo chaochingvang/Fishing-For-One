@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
     pool
         .query(queryText)
         .then((result) => {
+            console.log(`successfully got fish list from DB`);
             res.send(result.rows);
         })
         .catch((err) => {
@@ -27,6 +28,24 @@ router.get('/', (req, res) => {
  */
 router.post('/', (req, res) => {
     // POST route code here
+    console.log(`in /fish POST router`);
+    const values = [req.body.name, req.body.description, req.body.image_url];
+    const queryText = `
+        INSERT INTO "fish_list" ("name", "description", "image_url")
+        VALUES ($1, $2, $3)
+    `;
+
+    pool
+        .query(queryText, values)
+        .then((result) => {
+            console.log(`successfully added new fish`);
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.error(`ERROR! /fish POST router`);
+            res.sendStatus(500);
+        })
+
 });
 
 //DELETE ROUTE 
@@ -48,7 +67,7 @@ router.delete(`/:id`, (req, res) => {
             res.sendStatus(200);
         })
         .catch((err) => {
-            console.log(`ERROR! /fish/:id DELETE router`, err);
+            console.error(`ERROR! /fish/:id DELETE router`, err);
             res.sendStatus(500);
         })
 })
@@ -72,7 +91,7 @@ router.put(`/:id`, (req, res) => {
             res.sendStatus(200);
         })
         .catch((err) => {
-            console.log(`ERROR! /fish/:id PUT router`, err);
+            console.error(`ERROR! /fish/:id PUT router`, err);
             res.sendStatus(500);
         });
 })

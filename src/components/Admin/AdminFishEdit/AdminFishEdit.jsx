@@ -1,11 +1,8 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 //mui
-import { TextField, FormControl, Button, Stack } from '@mui/material';
+import { TextField, FormControl, Button } from '@mui/material';
 import { useState } from 'react';
-
-import './AdminFishEdit.css';
-import { useDispatch } from 'react-redux';
 
 
 function AdminFishEdit() {

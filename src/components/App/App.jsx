@@ -28,6 +28,7 @@ import AdminPage from '../Admin/AdminPage/AdminPage';
 import AdminFishList from '../Admin/AdminFishList/AdminFishList';
 import AdminLureList from '../Admin/AdminLureList/AdminLureList';
 import AdminFishEdit from '../Admin/AdminFishEdit/AdminFishEdit';
+import AdminFishForm from '../Admin/AdminFishForm/AdminFishForm';
 
 
 import '@fontsource/roboto/300.css';
@@ -109,6 +110,14 @@ function App() {
             path="/admin/fish/edit"
           >
             <AdminFishEdit />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/admin/fish/form"
+          >
+            <AdminFishForm />
           </ProtectedRoute>
 
           <ProtectedRoute

@@ -33,11 +33,23 @@ function* editFish(action) {
     }
 }
 
+function* addFish(action) {
+    try {
+        console.log(`in addFish saga`);
+        yield axios.post(`/api/fish`, action.payload.fishInput);
+        yield put({ type: `FETCH_FISH` });
+        yield action.payload.history.push(`/admin/fish`);
+    } catch {
+        console.error(err);
+        yield put({ type: `ERROR_ADD_FISH` });
+    }
+}
 
 function* fishSaga() {
     yield takeLatest(`FETCH_FISH`, fetchFish);
     yield takeLatest(`DELETE_FISH`, deleteFish);
     yield takeLatest(`EDIT_FISH`, editFish);
+    yield takeLatest(`ADD_FISH`, addFish)
 }
 
 
