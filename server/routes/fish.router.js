@@ -29,4 +29,9 @@ router.post('/', (req, res) => {
     // POST route code here
 });
 
+router.delete(`/:id`, (req, res) => {
+    console.log(`in /fish DELETE router`);
+    console.log(req.params.id);
+})
+
 module.exports = router;

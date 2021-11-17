@@ -11,12 +11,23 @@ function* fetchFish() {
     }
 }
 
+function* deleteFish(action) {
+    try {
+        console.log(`in saga`);
+        axios.delete(`/api/fish/${action.payload}`);
+        // yield put({ type: `FETCH_FISH` });
 
+    } catch (err) {
+        console.error(err);
+        yield put({ type: `ERROR_DELETE_FISH` });
+    }
+}
 
 
 
 function* fishSaga() {
-    yield takeLatest('FETCH_FISH', fetchFish)
+    yield takeLatest(`FETCH_FISH`, fetchFish);
+    yield takeLatest(`DELETE_FISH`, deleteFish)
 }
 
 
