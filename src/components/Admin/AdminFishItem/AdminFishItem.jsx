@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-
+import { useHistory } from 'react-router';
 
 //mui
 import { TableCell, TableRow, IconButton } from '@mui/material';
@@ -9,12 +9,15 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import './AdminFishItem.css';
 
 
+
 function AdminFishItem({ fish }) {
     const dispatch = useDispatch();
-
+    const history = useHistory();
 
     const handleEdit = (fish) => {
         console.log('clicked edit', fish);
+        dispatch({ type: `SELECTED_FISH`, payload: fish });
+        history.push(`/admin/fish/edit`)
     }
 
     const handleDelete = (fish) => {
@@ -26,7 +29,6 @@ function AdminFishItem({ fish }) {
         if (confirmation) {
             dispatch({type: `DELETE_FISH`, payload: fish.id})
         }
-
     }
 
     return (<>

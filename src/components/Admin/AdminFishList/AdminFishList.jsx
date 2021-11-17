@@ -14,7 +14,7 @@ function AdminFishList() {
         <TableContainer>
             <Table sx={{
                 minWidth: '70%',
-                maxWidth: '375px'
+                width: '90%'
             }}>
                 <TableHead>
                     <TableRow>

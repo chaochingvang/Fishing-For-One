@@ -3,7 +3,6 @@ import { useHistory } from 'react-router';
 
 //mui imports
 import { Box, Card, Button } from '@mui/material'
-import { useSelector } from 'react-redux';
 
 import './AdminPage.css';
 
@@ -19,7 +18,6 @@ function AdminPage() {
         <div className="admin">
             <Box sx={{
                 width: '50%',
-                height: 300,
                 margin: 'auto',
                 padding: '1em'
             }}>
@@ -40,7 +38,6 @@ function AdminPage() {
 
             <Box sx={{
                 width: '50%',
-                height: 300,
                 margin: 'auto',
                 padding: '1em'
             }}>

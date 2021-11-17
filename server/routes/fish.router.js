@@ -48,9 +48,32 @@ router.delete(`/:id`, (req, res) => {
             res.sendStatus(200);
         })
         .catch((err) => {
-            console.log(`ERRROR! /fish/:id DELETE router`, err);
+            console.log(`ERROR! /fish/:id DELETE router`, err);
             res.sendStatus(500);
         })
 })
 
+//PUT ROUTE
+router.put(`/:id`, (req, res) => {
+    console.log(`in /fish PUT router`);
+    const values = [req.body.name, req.body.description, req.body.image_url, req.params.id];
+    const queryText = `
+        UPDATE "fish_list"
+        SET "name" = $1,
+        "description" = $2,
+        "image_url" = $3
+        WHERE "id" = $4;
+    `;
+
+    pool
+        .query(queryText, values)
+        .then((result) => {
+            console.log(`successfully updated fish ID#`, req.params.id);
+            res.sendStatus(200);
+        })
+        .catch((err) => {
+            console.log(`ERROR! /fish/:id PUT router`, err);
+            res.sendStatus(500);
+        });
+})
 module.exports = router;

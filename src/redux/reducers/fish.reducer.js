@@ -9,6 +9,16 @@ const fishList = (state = [], action) => {
     }
 }
 
+const selectedFish = (state = {status: 'empty'}, action) => {
+    switch (action.type) {
+        case 'SELECTED_FISH':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     fishList,
+    selectedFish,
 });
