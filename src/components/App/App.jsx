@@ -25,6 +25,8 @@ import JournalForm from "../Journal/JournalForm/JournalForm";
 import FishPage from '../Fish/FishPage';
 import LurePage from '../Lure/LurePage';
 import AdminPage from '../Admin/AdminPage/AdminPage';
+import AdminFishList from '../Admin/AdminFishList/AdminFishList';
+import AdminLureList from '../Admin/AdminLureList/AdminLureList';
 
 
 import '@fontsource/roboto/300.css';
@@ -90,6 +92,22 @@ function App() {
             path="/admin"
           >
             <AdminPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/admin/fish"
+          >
+            <AdminFishList />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/admin/lure"
+          >
+            <AdminLureList />
           </ProtectedRoute>
 
           {/* ////////// FISH PAGE //////////// */}       
