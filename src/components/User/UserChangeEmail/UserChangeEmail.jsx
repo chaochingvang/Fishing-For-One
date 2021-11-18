@@ -29,7 +29,7 @@ function UserChangeEmail() {
         }
         else {
             console.log(`match`);
-            dispatch({ type: `CHANGE_EMAIL`, payload: newEmail });
+            dispatch({ type: `CHANGE_EMAIL`, payload: {newEmail} });
         }
     }
 

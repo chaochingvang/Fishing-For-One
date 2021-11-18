@@ -24,8 +24,20 @@ function* fetchUser() {
   }
 }
 
+function* changeEmail(action) {
+  try {
+    console.log(action.payload);
+    yield axios.put(`/api/user/changeEmail`, action.payload);
+    yield put({ type: `FETCH_USER` });
+  } catch (err) {
+    console.error(`ERROR w/ changeEmail saga`, err)
+    yield put({ type: `ERROR_CHANGE_EMAIL` });
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest(`CHANGE_EMAIL`, changeEmail);
 }
 
 export default userSaga;

@@ -51,4 +51,29 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
+
+router.put(`/changeEmail`, (req, res) => {
+  console.log(req.user.id);
+  console.log(`this is req.body`, req.body.newEmail);
+
+  const values = [req.body.newEmail, req.user.id];
+  const queryText = `
+    UPDATE "user"
+    SET "email" = $1
+    WHERE "id" = $2;
+  `;
+
+  pool
+    .query(queryText, values)
+    .then((result) => {
+      console.log(`successfully updated email address for user ID`, req.user.id);
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(`ERROR! /api/user/changeEmail failed!`, err);
+      res.sendStatus(500);
+    })
+})
+
+
 module.exports = router;
