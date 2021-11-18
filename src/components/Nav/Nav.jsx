@@ -47,8 +47,6 @@ function Nav() {
             <Link className="navLink" to="/admin">
               Admin
             </Link>
-
-            <LogOutButton className="navLink" />
           </>
         )}
 

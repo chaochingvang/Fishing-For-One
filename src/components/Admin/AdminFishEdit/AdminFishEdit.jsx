@@ -75,6 +75,7 @@ function AdminFishEdit() {
                                 onChange={(e) => setFishInput({ ...fishInput, image_url: e.target.value })}
                             />
                             <Button
+                                type="submit"
                                 variant="contained"
                                 onClick={handleSubmit}
                             >
