@@ -9,8 +9,11 @@ import RestoreIcon from '@mui/icons-material/Restore';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import { useHistory } from 'react-router';
-// import FishIcon from '../Icons/FishIcon';
+import SettingsIcon from '@mui/icons-material/Settings';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { ReactComponent as FishIcon } from '../../icons/fish.svg';
+import { ReactComponent as LureIcon } from '../../icons/lure.svg';
+
 import { SvgIcon } from '@mui/material';
 
 
@@ -39,10 +42,11 @@ function BottomNav(props) {
                     onChange={(event, newValue) => handleChange(event, newValue)
                     }
                 >
-                    <BottomNavigationAction label="Recents" icon={<SvgIcon><FishIcon /></SvgIcon>} />
-                    <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-                    <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} />
-                    <BottomNavigationAction label="Archive" icon={<ArchiveIcon />} />
+                    <BottomNavigationAction label="Journal" icon={<MenuBookIcon />} />
+                    <BottomNavigationAction label="Fish Info" icon={<SvgIcon><FishIcon /></SvgIcon>} />
+                    <BottomNavigationAction label="Lure Info" icon={<SvgIcon><LureIcon /></SvgIcon>} />
+                    
+                    <BottomNavigationAction label="Settings" icon={<SettingsIcon />} />
                 </BottomNavigation>
             </Paper>
         </div>
