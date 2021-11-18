@@ -227,7 +227,9 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
-        <BottomNav />
+        {user.id &&
+          <BottomNav />
+        }
       </div>
     </Router>
   );
