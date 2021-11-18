@@ -31,7 +31,7 @@ import AdminFishForm from '../Admin/AdminFishForm/AdminFishForm';
 import AdminLureList from '../Admin/AdminLureList/AdminLureList';
 import AdminLureEdit from '../Admin/AdminLureEdit/AdminLureEdit';
 import AdminLureForm from '../Admin/AdminLureForm/AdminLureForm';
-
+import BottomNav from '../BottomNav/BottomNav';
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -229,6 +229,7 @@ function App() {
             <h1>404</h1>
           </Route>
         </Switch>
+        <BottomNav />
         <Footer />
       </div>
     </Router>
