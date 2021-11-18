@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import { Paper} from '@mui/material';
-import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ArchiveIcon from '@mui/icons-material/Archive';
 import { useHistory } from 'react-router';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
@@ -16,6 +11,8 @@ import { ReactComponent as FishIcon } from '../../icons/fish.svg';
 import { ReactComponent as LureIcon } from '../../icons/lure.svg';
 
 import { SvgIcon } from '@mui/material';
+
+import './BottomNav.css';
 
 
 
@@ -40,10 +37,10 @@ function BottomNav(props) {
         }
         
     }
-
-    console.log(`this is accesslevel`, user.access_level);
-
+    
     return (<>
+        <div className="bottomNavSpacer">
+        </div>
         {(user.access_level !== 0) ? 
         <div>
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
@@ -63,6 +60,8 @@ function BottomNav(props) {
             </div>
             :
             <div>
+                <div className="bottomNavSpacer">
+                </div>
                 <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
                     <BottomNavigation
                         value={navValue}

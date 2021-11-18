@@ -1,8 +1,14 @@
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+import { useState } from 'react';
 
 //mui
-import { TableCell, TableRow, IconButton } from '@mui/material';
+import { TableCell, TableRow, IconButton, Button, Stack } from '@mui/material';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
@@ -13,21 +19,28 @@ function AdminLureItem({ lure }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const [open, setOpen] = useState(false);
+
     const handleEdit = (lure) => {
         console.log('clicked edit', lure);
         dispatch({ type: `SELECTED_LURE`, payload: lure });
         history.push(`/admin/lure/edit`)
     }
 
-    const handleDelete = (lure) => {
+    const handleOpen = (lure) => {
         console.log('clicked delete', lure);
-        const confirmation = confirm(`Are you sure you want to delete ${lure.name}?
+        setOpen(true);
+    }
 
-        This action cannot be undone.`)
+    const handleClose = () => {
+        console.log(`closing`);
+        setOpen(false);
+    }
 
-        if (confirmation) {
-            dispatch({ type: `DELETE_LURE`, payload: lure.id })
-        }
+    const handleDelete = (lure) => {
+        console.log(lure)
+        dispatch({ type: `DELETE_LURE`, payload: lure.id });
+        setOpen(false);
     }
 
     return (<>
@@ -57,13 +70,34 @@ function AdminLureItem({ lure }) {
                         display: 'flex',
                         flexDirection: 'column'
                     }}
-                    onClick={() => handleDelete(lure)}
+                    onClick={() => handleOpen(lure)}
                 >
                     <DeleteForeverIcon />
                     <p className="subtext">Delete</p>
                 </IconButton>
             </TableCell>
         </TableRow>
+
+        <Dialog
+            open={open}
+            onClose={handleClose}
+        >
+            <DialogTitle>
+                {`Delete ${lure.name}?`}
+            </DialogTitle>
+            <DialogContent>
+                <DialogContentText>
+                    Are you sure you want to delete this lure: <strong>{lure.name}</strong>? <br />
+                    This action cannot be undone and the changes will be permanent.
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Stack direction="row" spacing={5} sx={{ margin: 'auto' }}>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={(e) => handleDelete(lure)}>Confirm</Button>
+                </Stack>
+            </DialogActions>
+        </Dialog>
     </>)
 }
 

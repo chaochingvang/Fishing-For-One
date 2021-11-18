@@ -1,12 +1,19 @@
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
+import { useState } from 'react';
 
 //mui
-import { TableCell, TableRow, IconButton } from '@mui/material';
+import { TableCell, TableRow, IconButton, Button, Stack } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 import './AdminFishItem.css';
+
 
 
 
@@ -14,21 +21,28 @@ function AdminFishItem({ fish }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const [open, setOpen] = useState(false);
+
     const handleEdit = (fish) => {
         console.log('clicked edit', fish);
         dispatch({ type: `SELECTED_FISH`, payload: fish });
         history.push(`/admin/fish/edit`)
     }
 
-    const handleDelete = (fish) => {
+    const handleOpen = (fish) => {
         console.log('clicked delete', fish);
-        const confirmation = confirm(`Are you sure you want to delete ${fish.name}?
+        setOpen(true);
+    }
 
-        This action cannot be undone.`)
+    const handleClose = () => {
+        console.log(`closing`);
+        setOpen(false);
+    }
 
-        if (confirmation) {
-            dispatch({type: `DELETE_FISH`, payload: fish.id})
-        }
+    const handleDelete = (fish) => {
+        console.log(fish)
+        dispatch({ type: `DELETE_FISH`, payload: fish.id });
+        setOpen(false);
     }
 
     return (<>
@@ -58,13 +72,35 @@ function AdminFishItem({ fish }) {
                         display: 'flex',
                         flexDirection: 'column'
                     }}
-                    onClick={() => handleDelete(fish)}
+                    onClick={() => handleOpen(fish)}
                 >
                     <DeleteForeverIcon />
                     <p className="subtext">Delete</p>
                 </IconButton>
             </TableCell>
         </TableRow>
+
+
+        <Dialog
+            open={open}
+            onClose={handleClose}
+        >
+            <DialogTitle>
+                {`Delete ${fish.name}?`}
+            </DialogTitle>
+            <DialogContent>
+                <DialogContentText>
+                    Are you sure you want to delete this fish: <strong>{fish.name}</strong>? <br />
+                    This action cannot be undone and the changes will be permanent.
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Stack direction="row" spacing={5} sx={{ margin: 'auto' }}>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button onClick={(e) => handleDelete(fish)}>Confirm</Button>
+                </Stack>
+            </DialogActions>
+        </Dialog>
     </>)
 }
 
