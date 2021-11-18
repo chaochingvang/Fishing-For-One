@@ -7,6 +7,7 @@ import { useHistory } from 'react-router';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import LogoutIcon from '@mui/icons-material/Logout';
+import InfoIcon from '@mui/icons-material/Info';
 import { ReactComponent as FishIcon } from '../../icons/fish.svg';
 import { ReactComponent as LureIcon } from '../../icons/lure.svg';
 import CheckIcon from '@mui/icons-material/Check';
@@ -49,6 +50,11 @@ function BottomNav(props) {
     const handleViewUser = () => {
         setOpen(false);
         history.push(`/user`);
+    }
+
+    const handleAbout = () => {
+        setOpen(false);
+        history.push(`/about`);
     }
 
     const handleClose = () => {
@@ -105,6 +111,13 @@ function BottomNav(props) {
                     </DialogTitle>
                     <DialogActions>
                         <Stack direction="column" spacing={2} sx={{ margin: 'auto' }}>
+                            <Button
+                                onClick={handleAbout}
+                                variant="contained"
+                                startIcon={<InfoIcon />}
+                            >
+                                About App
+                            </Button>
                             <Button
                                 onClick={handleViewUser}
                                 variant="contained"
