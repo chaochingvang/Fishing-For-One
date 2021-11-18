@@ -10,6 +10,7 @@ function UserChangeEmail() {
     const dispatch = useDispatch();
 
     const [open, setOpen] = useState(false);
+    const [dialogText, setDialogText] = useState(``);
     const [newEmail, setNewEmail] = useState(``);
     const [newEmailConf, setNewEmailConf] = useState(``);
     console.log(`new email`, newEmail);
@@ -21,10 +22,17 @@ function UserChangeEmail() {
         console.log(`clicked sub`);
         if (newEmail !== newEmailConf) {
             console.log(`no!`);
+            setDialogText(`Please make sure that the email addresses that you've entered match!`)
             handleOpen();
         }
         else if (newEmail === ``) {
             console.log(`no!`);
+            setDialogText(`Please enter in a value for email address! Input field cannot be blank!`)
+            handleOpen();
+        }
+        else if (newEmail === user.email) {
+            console.log(`no!`);
+            setDialogText(`Please enter a different email address! Your new email address cannot be the same as your current one!`)
             handleOpen();
         }
         else {
@@ -95,7 +103,7 @@ function UserChangeEmail() {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Please enter all fields and make sure emails entered are matching!
+                        {dialogText}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
