@@ -11,6 +11,7 @@ import ArchiveIcon from '@mui/icons-material/Archive';
 import { useHistory } from 'react-router';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { ReactComponent as FishIcon } from '../../icons/fish.svg';
 import { ReactComponent as LureIcon } from '../../icons/lure.svg';
 
@@ -26,15 +27,25 @@ function BottomNav(props) {
     const [navValue, setNavValue] = useState(``);
 
     const handleChange = (event, newValue) => {
-        console.log(`this is event`, event.target);
         console.log(`this is newValue`, newValue);
         setNavValue(newValue);
+        if (newValue === `logout`) {
+            console.log(`log out pop up `);
+        }
+        else if (newValue === `settings`) {
+            console.log(`settings popup`);
+        }
+        else {
+            history.push(newValue);
+        }
         
     }
 
-    return (
+    console.log(`this is accesslevel`, user.access_level);
+
+    return (<>
+        {(user.access_level !== 0) ? 
         <div>
-            <p>Bottom Nav</p>
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
                 <BottomNavigation
                     value={navValue}
@@ -42,15 +53,32 @@ function BottomNav(props) {
                     onChange={(event, newValue) => handleChange(event, newValue)
                     }
                 >
-                    <BottomNavigationAction label="Journal" icon={<MenuBookIcon />} />
-                    <BottomNavigationAction label="Fish Info" icon={<SvgIcon><FishIcon /></SvgIcon>} />
-                    <BottomNavigationAction label="Lure Info" icon={<SvgIcon><LureIcon /></SvgIcon>} />
+                    <BottomNavigationAction value="/journal" label="Journal" icon={<MenuBookIcon />} />
+                    <BottomNavigationAction value="/fish" label="Fish Info" icon={<SvgIcon><FishIcon /></SvgIcon>} />
+                    <BottomNavigationAction value="/lure" label="Lure Info" icon={<SvgIcon><LureIcon /></SvgIcon>} />
                     
-                    <BottomNavigationAction label="Settings" icon={<SettingsIcon />} />
+                    <BottomNavigationAction value="settings" label="Settings" icon={<SettingsIcon />} />
                 </BottomNavigation>
             </Paper>
-        </div>
-    );
+            </div>
+            :
+            <div>
+                <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+                    <BottomNavigation
+                        value={navValue}
+                        showLabels
+                        onChange={(event, newValue) => handleChange(event, newValue)
+                        }
+                    >
+                        <BottomNavigationAction value="/admin/fish" label="Fish Database" icon={<SvgIcon><FishIcon /></SvgIcon>} />
+                        <BottomNavigationAction value="/admin/lure" label="Lure Database" icon={<SvgIcon><LureIcon /></SvgIcon>} />
+
+                        <BottomNavigationAction value="logout" label="Logout" icon={<LogoutIcon />} />
+                    </BottomNavigation>
+                </Paper>
+            </div>
+            }
+    </>);
 }
 
 export default BottomNav;
