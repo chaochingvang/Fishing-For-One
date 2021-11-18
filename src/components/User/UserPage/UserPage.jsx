@@ -1,7 +1,7 @@
 import React from 'react';
 import LogOutButton from '../../LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
-import { IconButton } from '@mui/material';
+import { IconButton, Button } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 
 
@@ -47,8 +47,14 @@ function UserPage() {
           </tr>
         </tbody>
       </table>
-
-
+      
+      <br /><br />
+      <Button
+        variant="contained"
+        onClick={() => history.push(`/user/password`)}
+      >
+        Change Password
+      </Button>
     </div>
   );
 }

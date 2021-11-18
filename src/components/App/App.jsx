@@ -14,6 +14,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../User/UserPage/UserPage';
 import UserChangeEmail from '../User/UserChangeEmail/UserChangeEmail';
+import UserNewPW from '../User/UserNewPW/UserNewPW';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
@@ -86,6 +87,14 @@ function App() {
             path="/user/email"
           >
             <UserChangeEmail />
+          </ProtectedRoute>
+          
+          <ProtectedRoute
+            // logged in shows UserPage else shows LoginPage
+            exact
+            path="/user/password"
+          >
+            <UserNewPW />
           </ProtectedRoute>
 
           <ProtectedRoute
