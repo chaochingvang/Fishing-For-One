@@ -29,6 +29,7 @@ function BottomNav(props) {
     const user = useSelector((store) => store.user);
     const [navValue, setNavValue] = useState(``);
     const [open, setOpen] = useState(false);
+    const [conf, setConf] = useState(false);
 
     const handleChange = (event, newValue) => {
         console.log(`this is newValue`, newValue);
@@ -58,6 +59,10 @@ function BottomNav(props) {
 
     const handleClose = () => {
         setOpen(false);
+    }
+
+    const handleConfClose = () => {
+        setConf(false);
     }
 
     return (<>
@@ -127,9 +132,38 @@ function BottomNav(props) {
                                 variant="contained"
                                 color="error"
                                 startIcon={<LogoutIcon />}
-                                onClick={() => dispatch({type: `LOGOUT`})}
+                                onClick={() => setConf(true)}
                             >
                                 Logout
+                            </Button>
+                        </Stack>
+                    </DialogActions>
+                </Dialog>
+
+                <Dialog
+                    open={conf}
+                    onClose={handleConfClose}
+                >
+                    <DialogTitle sx={{ textAlign: 'center' }}>
+                        Are you sure you want to logout?
+                    </DialogTitle>
+                    <DialogActions>
+                        <Stack direction="column" spacing={2} sx={{ margin: 'auto' }}>
+                            <Button
+                                variant="contained"
+                                color="success"
+                                startIcon={<CheckIcon />}
+                                onClick={() => dispatch({ type: `LOGOUT` })}
+                            >
+                                Yes
+                            </Button>
+                            <Button
+                                onClick={handleConfClose}
+                                variant="contained"
+                                color="error"
+                                startIcon={<CloseIcon />}
+                            >
+                                No
                             </Button>
                         </Stack>
                     </DialogActions>
@@ -182,7 +216,7 @@ function BottomNav(props) {
                             </Button>
                         </Stack>
                     </DialogActions>
-                </Dialog>``
+                </Dialog>
             </div>
         }
     </>);

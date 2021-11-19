@@ -32,6 +32,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     // POST route code here
     console.log(`in /fish POST router`);
+    console.log(`this is req.body`, req.body);
     const values = [req.body.name, req.body.description, req.body.image_url];
     const queryText = `
         INSERT INTO "fish_list" ("name", "description", "image_url")
@@ -45,7 +46,7 @@ router.post('/', (req, res) => {
             res.sendStatus(200);
         })
         .catch((err) => {
-            console.error(`ERROR! /fish POST router`);
+            console.error(`ERROR! /fish POST router`, err);
             res.sendStatus(500);
         })
 

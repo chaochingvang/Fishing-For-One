@@ -36,10 +36,11 @@ function* editFish(action) {
 function* addFish(action) {
     try {
         console.log(`in addFish saga`);
-        yield axios.post(`/api/fish`, action.payload.fishInput);
+        yield axios.post(`/api/fish`, action.payload);
         yield put({ type: `FETCH_FISH` });
-        yield action.payload.history.push(`/admin/fish`);
-    } catch {
+        // yield action.payload.history.push(`/admin/fish`);
+        yield put({type: `CHANGE_SUCCESSFUL`})
+    } catch (err) {
         console.error(err);
         yield put({ type: `ERROR_ADD_FISH` });
     }

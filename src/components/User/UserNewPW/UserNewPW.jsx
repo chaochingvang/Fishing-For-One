@@ -34,7 +34,7 @@ function UserNewPW() {
 
         if (isSuccessful) {
             history.push(`/user`);
-            dispatch({ type: `RESET_IS_SUCCESS` });
+            dispatch({ type: `RESET_IS_SUCCESSFUL` });
         }
     }
 

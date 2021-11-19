@@ -56,7 +56,6 @@ function AdminPage() {
                 </Card>
             </Box>
         </div>
-        <LogOutButton />
     </>)
 }
 export default AdminPage;
