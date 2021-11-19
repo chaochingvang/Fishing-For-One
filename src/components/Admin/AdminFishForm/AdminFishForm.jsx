@@ -69,7 +69,14 @@ function AdminFishForm() {
     }
 
     return (<>
+        <Button
+            variant="contained"
+            onClick={() => history.push(`/admin/fish`)}
+        >
+            Back to list
+        </Button>
         <h1>Admin Fish Form</h1>
+       
 
         <div className="formContainer">
             <form onSubmit={handleSubmit}>

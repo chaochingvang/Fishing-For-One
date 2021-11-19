@@ -1,11 +1,15 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+    rejectUnauthenticated,
+    rejectClearance,
+} = require('../modules/authentication-middleware');
 
 /**
  * GET route template
  */
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     // GET route code here
     console.log('in /lure GET router');
 
@@ -28,7 +32,7 @@ router.get('/', (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
+router.post('/', rejectClearance, (req, res) => {
     // POST route code here
     console.log(`in /lure POST router`);
     const values = [req.body.name, req.body.description, req.body.image_url];
@@ -51,7 +55,7 @@ router.post('/', (req, res) => {
 });
 
 //DELETE ROUTE 
-router.delete(`/:id`, (req, res) => {
+router.delete(`/:id`, rejectClearance, (req, res) => {
     console.log(`in /lure DELETE router`);
     console.log(req.params.id);
 
@@ -75,7 +79,7 @@ router.delete(`/:id`, (req, res) => {
 })
 
 //PUT ROUTE
-router.put(`/:id`, (req, res) => {
+router.put(`/:id`, rejectClearance, (req, res) => {
     console.log(`in /lure PUT router`);
     const values = [req.body.name, req.body.description, req.body.image_url, req.params.id];
     const queryText = `
