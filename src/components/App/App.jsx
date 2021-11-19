@@ -112,49 +112,77 @@ function App() {
             exact
             path="/admin"
           >
-            <AdminPage />
+            {(user.access_level !== 0) ?
+              <Redirect to="/403" />
+              :
+              <AdminPage />
+            }
           </ProtectedRoute>
 
           <ProtectedRoute
             exact
             path="/admin/fish"
           >
-            <AdminFishList />
+            {(user.access_level !== 0) ?
+              <Redirect to="/403" />
+              :
+              <AdminFishList />
+            }
           </ProtectedRoute>
 
           <ProtectedRoute
             exact
             path="/admin/fish/edit"
           >
-            <AdminFishEdit />
+            {(user.access_level !== 0) ?
+              <Redirect to="/403" />
+              :
+              <AdminFishEdit />
+            }
           </ProtectedRoute>
 
           <ProtectedRoute
             exact
             path="/admin/fish/form"
           >
-            <AdminFishForm />
+            {(user.access_level !== 0) ?
+              <Redirect to="/403" />
+              :
+              <AdminFishForm />
+            }
           </ProtectedRoute>
 
           <ProtectedRoute
             exact
             path="/admin/lure"
           >
-            <AdminLureList />
+            {(user.access_level !== 0) ?
+              <Redirect to="/403" />
+              :
+              <AdminLureList />
+            }
           </ProtectedRoute>
 
           <ProtectedRoute
             exact
             path="/admin/lure/edit"
           >
-            <AdminLureEdit />
+            {(user.access_level !== 0) ?
+              <Redirect to="/403" />
+              :
+              <AdminLureEdit />
+            }
           </ProtectedRoute>
 
           <ProtectedRoute
             exact
             path="/admin/lure/form"
           >
-            <AdminLureForm />
+            {(user.access_level !== 0) ?
+              <Redirect to="/403" />
+              :
+              <AdminLureForm />
+            }
           </ProtectedRoute>
           {/* //// END ADMIN PAGES //// */}
 

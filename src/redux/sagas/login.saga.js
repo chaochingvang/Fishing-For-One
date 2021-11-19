@@ -18,9 +18,20 @@ function* loginUser(action) {
     yield axios.post('/api/user/login', action.payload.loginInfo, config);
     // after the user has logged in
     // get the user information from the server
-    yield put({ type: 'FETCH_USER' });
-    //pushes user to journal page after logging in
-    yield action.payload.history.push(`/journal`);
+
+    //FETCH USER SAGA 
+    //wanted response for conditional push on login
+    const response = yield axios.get('/api/user', config);
+    yield put({ type: 'SET_USER', payload: response.data });
+
+    //if user is admin, push to /admin on login
+    //else push to /journal 
+    if (response.data.access_level === 0) {
+      yield action.payload.history.push(`/admin`);
+    }
+    else {
+      yield action.payload.history.push(`/journal`);
+    }
   } catch (error) {
     console.log('Error with user login:', error);
     if (error.response.status === 401) {

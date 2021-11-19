@@ -9,7 +9,7 @@ function Nav() {
 
   return (
     <div className="nav">
-      <Link to="/home">
+      <Link to="/login">
         <h2 className="nav-title">Prime Solo Project</h2>
       </Link>
       <div>
