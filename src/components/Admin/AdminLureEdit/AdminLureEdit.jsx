@@ -1,14 +1,18 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 //mui
-import { TextField, FormControl, Button } from '@mui/material';
-import { useState } from 'react';
+import { TextField, FormControl, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
+import { useState, useEffect } from 'react';
 
 
 function AdminLureEdit() {
     const history = useHistory();
     const dispatch = useDispatch();
     const lure = useSelector(store => store.lure.selectedLure);
+    //success alert states
+    const isSuccessful = useSelector(store => store.success.isSuccessful);
+    const [dialogText, setDialogText] = useState(``);
+    const [open, setOpen] = useState(false);
 
     const defaultState = {
         id:  lure.id,
@@ -22,9 +26,34 @@ function AdminLureEdit() {
 
     const handleSubmit = () => {
         console.log(`clicked`);
-        dispatch({type: `EDIT_LURE`, payload: {lureInput, history}})
+        dispatch({type: `EDIT_LURE`, payload: lureInput})
     }
 
+    //success alert code block
+    useEffect(() => {
+        status();
+    }, [isSuccessful]);
+
+    const status = () => {
+        if (isSuccessful) {
+            setDialogText(`${lureInput.name} successfully edited!`)
+            handleOpen();
+        }
+    }
+
+    const handleOpen = () => {
+        setOpen(true);
+    }
+
+    const handleClose = () => {
+        setOpen(false);
+
+        if (isSuccessful) {
+            history.push(`/admin/lure`);
+            dispatch({ type: `RESET_IS_SUCCESSFUL` });
+        }
+    }
+    //end success alert code block
     console.log(lure);
 
     return (<>
@@ -82,8 +111,23 @@ function AdminLureEdit() {
                             </Button>
                         </FormControl>
                     </form>
-
                 </div>
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                >
+                    <DialogTitle>
+                        {isSuccessful ? <>SUCCESS!</> : <>ERROR!</>}
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {dialogText}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose}>Back</Button>
+                    </DialogActions>
+                </Dialog>
             </>
         }
 

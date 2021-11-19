@@ -70,7 +70,7 @@ function AdminLureForm() {
     console.log(lureInput);
 
     return (<>
-        <h1>Admin Lure FOrm</h1>
+        <h1>Admin Lure Form</h1>
 
         <div className="formContainer">
             <form onSubmit={handleSubmit}>

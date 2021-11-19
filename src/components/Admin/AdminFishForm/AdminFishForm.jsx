@@ -69,7 +69,7 @@ function AdminFishForm() {
     }
 
     return (<>
-        <h1>Admin Fish FOrm</h1>
+        <h1>Admin Fish Form</h1>
 
         <div className="formContainer">
             <form onSubmit={handleSubmit}>

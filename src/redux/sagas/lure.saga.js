@@ -25,9 +25,9 @@ function* deleteLure(action) {
 
 function* editLure(action) {
     try {
-        yield axios.put(`/api/lure/${action.payload.lureInput.id}`, action.payload.lureInput)
+        yield axios.put(`/api/lure/${action.payload.id}`, action.payload)
         yield put({ type: `FETCH_LURE` });
-        yield action.payload.history.push(`/admin/lure`);
+        yield put({ type: `CHANGE_SUCCESSFUL` });
     } catch (err) {
         console.error(err);
         yield put({ type: `ERROR_EDIT_LURE` });
