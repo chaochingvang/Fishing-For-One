@@ -52,7 +52,7 @@ router.post('/logout', (req, res) => {
 });
 
 
-router.put(`/changeEmail`, (req, res) => {
+router.put(`/changeEmail`, rejectUnauthenticated, (req, res) => {
   console.log(req.user.id);
   console.log(`this is req.body`, req.body.newEmail);
  
@@ -76,7 +76,7 @@ router.put(`/changeEmail`, (req, res) => {
     })
 });
 
-router.put(`/changePassword`, (req, res) => {
+router.put(`/changePassword`, rejectUnauthenticated, (req, res) => {
   console.log(req.user.id);
   console.log(`req.body`, req.body.newPW);
   const password = encryptLib.encryptPassword(req.body.newPW);

@@ -33,7 +33,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     // POST route code here
     console.log(`in /journal POST router`);
     console.log(req.body.image_url);
