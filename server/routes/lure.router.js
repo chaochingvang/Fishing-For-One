@@ -44,7 +44,7 @@ router.post('/', (req, res) => {
             res.sendStatus(200);
         })
         .catch((err) => {
-            console.error(`ERROR! /lure POST router`);
+            console.error(`ERROR! /lure POST router`, err);
             res.sendStatus(500);
         })
 

@@ -66,7 +66,6 @@ function AdminFishForm() {
         else {
             dispatch({ type: `ADD_FISH`, payload: fishInput});
         }
-
     }
 
     return (<>

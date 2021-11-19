@@ -37,10 +37,10 @@ function* editLure(action) {
 function* addLure(action) {
     try {
         console.log(`in addLure saga`);
-        yield axios.post(`/api/lure`, action.payload.lureInput);
+        yield axios.post(`/api/lure`, action.payload);
         yield put({ type: `FETCH_LURE` });
-        yield action.payload.history.push(`/admin/lure`);
-    } catch {
+        yield put({ type: `CHANGE_SUCCESSFUL` });
+    } catch (err){
         console.error(err);
         yield put({ type: `ERROR_ADD_LURE` });
     }
