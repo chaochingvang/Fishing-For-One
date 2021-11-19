@@ -24,9 +24,9 @@ function* deleteFish(action) {
 
 function* editFish(action) {
     try {
-        yield axios.put(`/api/fish/${action.payload.fishInput.id}`, action.payload.fishInput)
+        yield axios.put(`/api/fish/${action.payload.id}`, action.payload)
         yield put({ type: `FETCH_FISH` });
-        yield action.payload.history.push(`/admin/fish`);
+        yield put({ type: `CHANGE_SUCCESSFUL` })
     } catch (err) {
         console.error(err);
         yield put({ type: `ERROR_EDIT_FISH` });
@@ -38,7 +38,6 @@ function* addFish(action) {
         console.log(`in addFish saga`);
         yield axios.post(`/api/fish`, action.payload);
         yield put({ type: `FETCH_FISH` });
-        // yield action.payload.history.push(`/admin/fish`);
         yield put({type: `CHANGE_SUCCESSFUL`})
     } catch (err) {
         console.error(err);

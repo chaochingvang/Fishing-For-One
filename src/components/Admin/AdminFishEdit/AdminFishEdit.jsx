@@ -1,14 +1,19 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 //mui
-import { TextField, FormControl, Button } from '@mui/material';
-import { useState } from 'react';
+import { TextField, FormControl, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
+import { useState, useEffect } from 'react';
 
 
 function AdminFishEdit() {
     const history = useHistory();
     const dispatch = useDispatch();
     const fish = useSelector(store => store.fish.selectedFish);
+
+    //success alert states
+    const isSuccessful = useSelector(store => store.success.isSuccessful);
+    const [dialogText, setDialogText] = useState(``);
+    const [open, setOpen] = useState(false);
 
     const defaultState = {
         id:  fish.id,
@@ -22,10 +27,35 @@ function AdminFishEdit() {
 
     const handleSubmit = () => {
         console.log(`clicked`);
-        dispatch({type: `EDIT_FISH`, payload: {fishInput, history}})
+        dispatch({ type: `EDIT_FISH`, payload: fishInput });
     }
 
-    console.log(fish);
+
+    //success alert code block
+    useEffect(() => {
+        status();
+    }, [isSuccessful]);
+
+    const status = () => {
+        if (isSuccessful) {
+            setDialogText(`${fishInput.name} successfully edited!`)
+            handleOpen();
+        }
+    }
+
+    const handleOpen = () => {
+        setOpen(true);
+    }
+
+    const handleClose = () => {
+        setOpen(false);
+
+        if (isSuccessful) {
+            history.push(`/admin/fish`);
+            dispatch({ type: `RESET_IS_SUCCESSFUL` });
+        }
+    }
+    //end success alert code block
 
     return (<>
         <h1>FISH EDIT</h1>
@@ -83,8 +113,23 @@ function AdminFishEdit() {
                             </Button>
                         </FormControl>
                     </form>
-
                 </div>
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                >
+                    <DialogTitle>
+                        {isSuccessful ? <>SUCCESS!</> : <>ERROR!</>}
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {dialogText}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose}>Back</Button>
+                    </DialogActions>
+                </Dialog>
             </>
         }
 
