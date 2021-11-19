@@ -55,6 +55,7 @@ router.post('/logout', (req, res) => {
 router.put(`/changeEmail`, (req, res) => {
   console.log(req.user.id);
   console.log(`this is req.body`, req.body.newEmail);
+ 
 
   const values = [req.body.newEmail, req.user.id];
   const queryText = `
@@ -73,6 +74,30 @@ router.put(`/changeEmail`, (req, res) => {
       console.log(`ERROR! /api/user/changeEmail failed!`, err);
       res.sendStatus(500);
     })
+});
+
+router.put(`/changePassword`, (req, res) => {
+  console.log(req.user.id);
+  console.log(`req.body`, req.body.newPW);
+  const password = encryptLib.encryptPassword(req.body.newPW);
+  const values = [password, req.user.id];
+  const queryText = `
+    UPDATE "user"
+    set "password" = $1
+    WHERE "id" = $2
+  `;
+
+  pool
+    .query(queryText, values)
+    .then((result) => {
+      console.log(`successfully changed PW for user ID`, req.user.id);
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.error(`ERROR! /api/user/changePassword failed!`, err);
+      res.sendStatus(500);
+    })
+
 })
 
 

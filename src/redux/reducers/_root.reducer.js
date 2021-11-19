@@ -4,6 +4,7 @@ import user from './user.reducer';
 import journal from './journal.reducer';
 import fish from './fish.reducer';
 import lure from './lure.reducer';
+import success from './success.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   journal,
   fish,
   lure,
+  success,
 });
 
 export default rootReducer;

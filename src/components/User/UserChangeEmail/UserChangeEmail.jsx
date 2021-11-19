@@ -2,10 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
 import { Button, TextField, FormControl, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Box } from '@mui/material';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function UserChangeEmail() {
     const user = useSelector(store => store.user);
+    const isSuccessful = useSelector(store => store.success.isSuccessful);
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -15,6 +16,10 @@ function UserChangeEmail() {
     const [newEmailConf, setNewEmailConf] = useState(``);
     console.log(`new email`, newEmail);
     console.log(`new email confirmation`, newEmailConf);
+
+    useEffect(() => {
+        status();
+    }, [isSuccessful]);
 
 
     const handleSubmit = (event) => {
@@ -52,7 +57,20 @@ function UserChangeEmail() {
         setOpen(false);
         setNewEmail(``);
         setNewEmailConf(``);
+
+        if (isSuccessful) {
+            history.push(`/user`);
+            dispatch({ type: `RESET_IS_SUCCESS` });
+        }
     }
+
+    const status = () => {
+        if (isSuccessful) {
+            setDialogText(`Email successfully changed!`)
+            handleOpen();
+        }
+    }
+
     return (<>
         <h1>CHANGE EMAIL</h1>
         <Button
@@ -99,7 +117,7 @@ function UserChangeEmail() {
                 onClose={handleClose}
             >
                 <DialogTitle>
-                    ERROR!
+                    {isSuccessful ? <>SUCCESS!</> : <>ERROR!</>}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>

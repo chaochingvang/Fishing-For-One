@@ -2,16 +2,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
 import { Button, TextField, FormControl, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Box } from '@mui/material';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function UserNewPW() {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const isSuccessful = useSelector(store => store.success.isSuccessful);
+
+    
     const [open, setOpen] = useState(false);
     const [dialogText, setDialogText] = useState(``);
     const [newPW, setNewPW] = useState(``);
     const [newPWConf, setNewPWConf] = useState(``);
+
+    useEffect(() => {
+        status();
+    }, [isSuccessful]);
 
     const handleOpen = () => {
         console.log(`open`);
@@ -24,6 +31,11 @@ function UserNewPW() {
         setOpen(false);
         setNewPW(``);
         setNewPWConf(``);
+
+        if (isSuccessful) {
+            history.push(`/user`);
+            dispatch({ type: `RESET_IS_SUCCESS` });
+        }
     }
 
     const handleSubmit = (event) => {
@@ -41,8 +53,18 @@ function UserNewPW() {
         }
         else {
             console.log(`match!`);
+            dispatch({ type: `CHANGE_PASSWORD`, payload: { newPW } });
         }
     }
+
+    const status = () => {
+        if (isSuccessful) {
+            setDialogText(`Password successfully changed!`)
+            handleOpen();
+        }
+    }
+
+    console.log(`isSuccess`, isSuccessful);
 
     return (<>
 
@@ -87,7 +109,7 @@ function UserNewPW() {
                 onClose={handleClose}
             >
                 <DialogTitle>
-                    ERROR!
+                    {isSuccessful ? <>SUCCESS!</> : <>ERROR!</>}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText>

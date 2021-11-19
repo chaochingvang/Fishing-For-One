@@ -29,15 +29,29 @@ function* changeEmail(action) {
     console.log(action.payload);
     yield axios.put(`/api/user/changeEmail`, action.payload);
     yield put({ type: `FETCH_USER` });
+    yield put({ type: `CHANGE_SUCCESSFUL` });
   } catch (err) {
     console.error(`ERROR w/ changeEmail saga`, err)
     yield put({ type: `ERROR_CHANGE_EMAIL` });
   }
 }
 
+function* changePassword(action) {
+  try {
+    console.log(`this is newPW`, action.payload);
+    yield axios.put(`/api/user/changePassword`, action.payload);
+    yield put({ type: `FETCH_USER` });
+    yield put({ type: `CHANGE_SUCCESSFUL` });
+  } catch (err) {
+    console.error(`ERROR w/ changePassword saga`, err);
+    yield put({ type: `ERROR_CHANGE_PASSWORD` });
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest(`CHANGE_EMAIL`, changeEmail);
+  yield takeLatest(`CHANGE_PASSWORD`, changePassword);
 }
 
 export default userSaga;
