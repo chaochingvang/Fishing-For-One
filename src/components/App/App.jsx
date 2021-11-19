@@ -57,8 +57,8 @@ function App() {
       <div>
         <Nav />
         <Switch>
-          {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/home" />
+          {/* Visiting localhost:3000 will redirect to localhost:3000/login */}
+          <Redirect exact from="/" to="/login" />
 
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
@@ -73,30 +73,7 @@ function App() {
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-          <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/user"
-          >
-            <UserPage />
-          </ProtectedRoute>
-
-          <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/user/email"
-          >
-            <UserChangeEmail />
-          </ProtectedRoute>
           
-          <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/user/password"
-          >
-            <UserNewPW />
-          </ProtectedRoute>
-
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
@@ -105,7 +82,32 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
-          {/* ////////// ADMIN PAGE //////////// */}
+
+          {/* //// START USER PAGES //// */}
+          <ProtectedRoute
+            exact
+            path="/user"
+          >
+            <UserPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/user/email"
+          >
+            <UserChangeEmail />
+          </ProtectedRoute>
+          
+          <ProtectedRoute
+            exact
+            path="/user/password"
+          >
+            <UserNewPW />
+          </ProtectedRoute>
+          {/* //// END USER PAGES //// */}
+
+
+          {/* //// START ADMIN PAGES //// */}
           <ProtectedRoute
             exact
             path="/admin"
@@ -141,7 +143,6 @@ function App() {
             <AdminLureList />
           </ProtectedRoute>
 
-
           <ProtectedRoute
             exact
             path="/admin/lure/edit"
@@ -155,8 +156,10 @@ function App() {
           >
             <AdminLureForm />
           </ProtectedRoute>
+          {/* //// END ADMIN PAGES //// */}
 
-          {/* ////////// FISH PAGE //////////// */}       
+
+          {/* //// START INFO PAGES //// */}
           <ProtectedRoute
             exact
             path="/fish"
@@ -164,17 +167,16 @@ function App() {
             <FishPage />
           </ProtectedRoute>
 
-
-          {/* ////////// LURE PAGE //////////// */}
           <ProtectedRoute
             exact
             path="/lure"
           >
             <LurePage />
           </ProtectedRoute>
+          {/* //// END INFO PAGES //// */}
 
 
-          {/* ////////// JOURNAL PAGES //////////// */ }
+          {/* //// START JOURNAL PAGES //// */}
           <ProtectedRoute
             exact
             path="/journal"
@@ -195,7 +197,7 @@ function App() {
           >
             <JournalDetails />
           </ProtectedRoute>
-          {/* ////////// END JOURNAL PAGES //////////// */}
+          {/* //// END JOURNAL PAGES //// */}
 
 
           <Route
@@ -226,19 +228,6 @@ function App() {
             }
           </Route>
 
-          <Route
-            exact
-            path="/home"
-          >
-            {user.id ?
-              // If the user is already logged in, 
-              // redirect them to the /user page
-              <Redirect to="/journal" />
-              :
-              // Otherwise, show the Landing page
-              <LandingPage />
-            }
-          </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
