@@ -101,10 +101,11 @@ function LurePage() {
                                     margin: 'auto',
                                     backgroundColor: '#b2dfdb'
                                 }}>
-                                <img src={lureList[selectedIndex]?.image_url} />
-                                <h3>{lureList[selectedIndex]?.id}</h3>
                                 <h3>{lureList[selectedIndex]?.name}</h3>
-                                <h5>{lureList[selectedIndex]?.description}</h5>
+                                <img src={lureList[selectedIndex]?.image_url} />
+                                <p>{lureList[selectedIndex]?.description}</p>
+                                <p><strong>Technique:</strong> {lureList[selectedIndex]?.technique}</p>
+                                <p><strong>Target:</strong> {lureList[selectedIndex]?.target_fish}</p>
                             </Card>
                         </td>
                         <td>
