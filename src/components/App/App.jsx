@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../User/UserPage/UserPage';
 import UserChangeEmail from '../User/UserChangeEmail/UserChangeEmail';
@@ -255,11 +254,27 @@ function App() {
               <RegisterPage />
             }
           </Route>
-
+          
+          <Route
+            exact
+            path="/403"
+          >
+            {user.id ?
+              // If the user is already logged in, 
+              // redirect to the /user page
+              <>
+                <h1>403 - Forbidden</h1>
+                <h2>You do not have access to this page!</h2>
+              </>
+              :
+              // Otherwise, show the login page
+              <LoginPage />
+            }
+          </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
-            <h1>404</h1>
+            <h1>404 - Page Does Not Exist</h1>
           </Route>
         </Switch>
         {user.id &&

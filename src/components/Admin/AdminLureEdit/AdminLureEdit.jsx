@@ -14,6 +14,8 @@ function AdminLureEdit() {
     const [dialogText, setDialogText] = useState(``);
     const [open, setOpen] = useState(false);
 
+    const [render, setRender] = useState(false);
+
     const defaultState = {
         id:  lure.id,
         name: lure.name,
@@ -32,6 +34,7 @@ function AdminLureEdit() {
     //success alert code block
     useEffect(() => {
         status();
+        setRender(!render)
     }, [isSuccessful]);
 
     const status = () => {
