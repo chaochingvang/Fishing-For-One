@@ -49,7 +49,8 @@ function AdminLureItem({ lure }) {
             <TableCell><img alt={lure.name} src={lure.image_url} /></TableCell>
             <TableCell>{lure.name}</TableCell>
             <TableCell>{lure.description}</TableCell>
-            <TableCell>{lure.image_url}</TableCell>
+            <TableCell>{lure.technique}</TableCell>
+            <TableCell>{lure.target_fish}</TableCell>
             <TableCell>
                 <IconButton
                     aria-label="edit"

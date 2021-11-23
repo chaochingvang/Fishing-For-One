@@ -50,8 +50,8 @@ function AdminFishItem({ fish }) {
             <TableCell>{fish.id}</TableCell>
             <TableCell><img alt={fish.name} src={fish.image_url} /></TableCell>
             <TableCell>{fish.name}</TableCell>
-            <TableCell>{fish.description}</TableCell>
-            <TableCell>{fish.image_url}</TableCell>
+            <TableCell>{fish.habitat}</TableCell>
+            <TableCell>{fish.feeding_preferences}</TableCell>
             <TableCell>
                 <IconButton
                     aria-label="edit"

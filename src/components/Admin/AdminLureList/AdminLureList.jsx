@@ -31,7 +31,8 @@ function AdminLureList() {
                         <TableCell>Image</TableCell>
                         <TableCell>Name</TableCell>
                         <TableCell>Description</TableCell>
-                        <TableCell>Image_URL</TableCell>
+                        <TableCell>Technique</TableCell>
+                        <TableCell>Target Fish</TableCell>
                         <TableCell>Edit</TableCell>
                         <TableCell>Delete</TableCell>
                     </TableRow>

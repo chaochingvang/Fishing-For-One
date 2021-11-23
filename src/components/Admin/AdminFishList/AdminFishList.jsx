@@ -30,8 +30,8 @@ function AdminFishList() {
                         <TableCell>ID</TableCell>
                         <TableCell>Image</TableCell>
                         <TableCell>Name</TableCell>
-                        <TableCell>Description</TableCell>
-                        <TableCell>Image_URL</TableCell>
+                        <TableCell>Habitat</TableCell>
+                        <TableCell>Feeding Preferences</TableCell>
                         <TableCell>Edit</TableCell>
                         <TableCell>Delete</TableCell>
                     </TableRow>
