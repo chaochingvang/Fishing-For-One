@@ -20,6 +20,8 @@ function AdminLureEdit() {
         id:  lure.id,
         name: lure.name,
         description: lure.description,
+        technique: lure.technique,
+        target_fish: lure.target_fish,
         image_url: lure.image_url,
     }
 
@@ -98,6 +100,26 @@ function AdminLureEdit() {
                                 type="text"
                                 value={lureInput.description}
                                 onChange={(e) => setLureInput({ ...lureInput, description: e.target.value })}
+                            />
+                            <TextField
+                                required
+                                multiline
+                                maxRows={3}
+                                minRows={3}
+                                helperText="Description"
+                                type="text"
+                                value={lureInput.technique}
+                                onChange={(e) => setLureInput({ ...lureInput, technique: e.target.value })}
+                            />
+                            <TextField
+                                required
+                                multiline
+                                maxRows={3}
+                                minRows={3}
+                                helperText="Description"
+                                type="text"
+                                value={lureInput.target_fish}
+                                onChange={(e) => setLureInput({ ...lureInput, target_fish: e.target.value })}
                             />
                             <TextField
                                 required

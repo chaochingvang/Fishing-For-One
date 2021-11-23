@@ -35,10 +35,10 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.post('/', rejectClearance, (req, res) => {
     // POST route code here
     console.log(`in /lure POST router`);
-    const values = [req.body.name, req.body.description, req.body.image_url];
+    const values = [req.body.name, req.body.description, req.body.technique, req.body.target_fish, req.body.image_url];
     const queryText = `
-        INSERT INTO "lure_list" ("name", "description", "image_url")
-        VALUES ($1, $2, $3)
+        INSERT INTO "lure_list" ("name", "description", "technique", "target_fish", "image_url")
+        VALUES ($1, $2, $3, $4, $5)
     `;
 
     pool
@@ -81,13 +81,15 @@ router.delete(`/:id`, rejectClearance, (req, res) => {
 //PUT ROUTE
 router.put(`/:id`, rejectClearance, (req, res) => {
     console.log(`in /lure PUT router`);
-    const values = [req.body.name, req.body.description, req.body.image_url, req.params.id];
+    const values = [req.body.name, req.body.description, req.body.technique, req.body.target_fish, req.body.image_url, req.params.id];
     const queryText = `
         UPDATE "lure_list"
         SET "name" = $1,
         "description" = $2,
-        "image_url" = $3
-        WHERE "id" = $4;
+        "technique" = $3,
+        "target_fish" = $4,
+        "image_url" = $5
+        WHERE "id" = $6;
     `;
 
     pool
