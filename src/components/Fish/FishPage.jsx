@@ -101,10 +101,10 @@ function FishPage() {
                                     margin: 'auto',
                                     backgroundColor: '#b2dfdb'
                                 }}>
-                                <img src={fishList[selectedIndex]?.image_url} />
-                                <h3>{fishList[selectedIndex]?.id}</h3>
                                 <h3>{fishList[selectedIndex]?.name}</h3>
-                                <h5>{fishList[selectedIndex]?.description}</h5>
+                                <img src={fishList[selectedIndex]?.image_url} />
+                                <p><strong>Habitat:</strong> {fishList[selectedIndex]?.habitat}</p>
+                                <p><strong>Feeding Preferences:</strong> {fishList[selectedIndex]?.feeding_preferences}</p>
                             </Card>
                         </td>
                         <td>
