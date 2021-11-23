@@ -37,10 +37,10 @@ router.post('/', rejectClearance, (req, res) => {
     // POST route code here
     console.log(`in /fish POST router`);
     console.log(`this is req.body`, req.body);
-    const values = [req.body.name, req.body.description, req.body.image_url];
+    const values = [req.body.name, req.body.habitat, req.body.feeding_preferences, req.body.image_url];
     const queryText = `
-        INSERT INTO "fish_list" ("name", "description", "image_url")
-        VALUES ($1, $2, $3)
+        INSERT INTO "fish_list" ("name", "habitat", "feeding_preferences", "image_url")
+        VALUES ($1, $2, $3, $4)
     `;
 
     pool
@@ -83,13 +83,14 @@ router.delete(`/:id`, rejectClearance, (req, res) => {
 //PUT ROUTE
 router.put(`/:id`, rejectClearance, (req, res) => {
     console.log(`in /fish PUT router`);
-    const values = [req.body.name, req.body.description, req.body.image_url, req.params.id];
+    const values = [req.body.name, req.body.habitat, req.body.feeding_preferences, req.body.image_url, req.params.id];
     const queryText = `
         UPDATE "fish_list"
         SET "name" = $1,
-        "description" = $2,
-        "image_url" = $3
-        WHERE "id" = $4;
+        "habitat" = $2,
+        "feeding_preferences" = $3,
+        "image_url" = $4
+        WHERE "id" = $5;
     `;
 
     pool

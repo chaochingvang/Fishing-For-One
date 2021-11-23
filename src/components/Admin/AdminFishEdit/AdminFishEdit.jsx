@@ -18,7 +18,8 @@ function AdminFishEdit() {
     const defaultState = {
         id:  fish.id,
         name: fish.name,
-        description: fish.description,
+        habitat: fish.habitat,
+        feeding_preferences: fish.feeding_preferences,
         image_url: fish.image_url,
     }
 
@@ -92,10 +93,20 @@ function AdminFishEdit() {
                                 multiline
                                 maxRows={3}
                                 minRows={3}
-                                helperText="Description"
+                                helperText="Habitat"
                                 type="text"
-                                value={fishInput.description}
-                                onChange={(e) => setFishInput({ ...fishInput, description: e.target.value })}
+                                value={fishInput.habitat}
+                                onChange={(e) => setFishInput({ ...fishInput, habitat: e.target.value })}
+                            />
+                            <TextField
+                                required
+                                multiline
+                                maxRows={3}
+                                minRows={3}
+                                helperText="Feeding Preferences"
+                                type="text"
+                                value={fishInput.feeding_preferences}
+                                onChange={(e) => setFishInput({ ...fishInput, feeding_preferences: e.target.value })}
                             />
                             <TextField
                                 required
