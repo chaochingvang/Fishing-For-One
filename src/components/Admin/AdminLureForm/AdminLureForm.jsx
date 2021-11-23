@@ -15,6 +15,8 @@ function AdminLureForm() {
     const defaultState = {
         name: ``,
         description: ``,
+        technique: ``,
+        target_fish: ``,
         image_url: ``,
     }
 
@@ -93,6 +95,28 @@ function AdminLureForm() {
                         type="text"
                         value={lureInput.description}
                         onChange={(e) => setLureInput({ ...lureInput, description: e.target.value })}
+                    />
+                    <TextField
+                        required
+                        multiline
+                        maxRows={3}
+                        minRows={3}
+                        helperText="Technique (* required)"
+                        placeholder="Technique"
+                        type="text"
+                        value={lureInput.technique}
+                        onChange={(e) => setLureInput({ ...lureInput, description: e.target.value })}
+                    />
+                    <TextField
+                        required
+                        multiline
+                        maxRows={3}
+                        minRows={3}
+                        helperText="Target Fish (* required)"
+                        placeholder="Target Fish"
+                        type="text"
+                        value={lureInput.target_fish}
+                        onChange={(e) => setLureInput({ ...lureInput, target_fish: e.target.value })}
                     />
                     <TextField
                         required
