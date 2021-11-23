@@ -64,6 +64,16 @@ function AdminLureForm() {
             setDialogText(`Image of lure is required! Please enter an image URL for the lure.`)
             handleOpen();
         }
+        else if (lureInput.technique === ``) {
+            console.log(`no!`);
+            setDialogText(`Lure technique description field cannot be blank! Please enter a technique description for the lure!`)
+            handleOpen();
+        }
+        else if (lureInput.target_fish === ``) {
+            console.log(`no!`);
+            setDialogText(`Targeted fish types of the lure is required! Please enter in the types of fishes the lure is intended for.`)
+            handleOpen();
+        }
         else {
             dispatch({ type: `ADD_LURE`, payload: lureInput });
         }
@@ -105,7 +115,7 @@ function AdminLureForm() {
                         placeholder="Technique"
                         type="text"
                         value={lureInput.technique}
-                        onChange={(e) => setLureInput({ ...lureInput, description: e.target.value })}
+                        onChange={(e) => setLureInput({ ...lureInput, technique: e.target.value })}
                     />
                     <TextField
                         required
