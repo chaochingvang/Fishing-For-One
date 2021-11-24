@@ -15,7 +15,8 @@ function AdminFishForm() {
 
     const defaultState = {
         name: ``,
-        description: ``,
+        habitat: ``,
+        feeding_preferences: ``,
         image_url: ``,
     }
 
@@ -53,9 +54,14 @@ function AdminFishForm() {
             setDialogText(`Fish Name field cannot be blank! Please enter a name for the fish.`)
             handleOpen();
         }
-        else if (fishInput.description === ``) {
+        else if (fishInput.habitat === ``) {
             console.log(`no!`);
-            setDialogText(`Fish description field cannot be blank! Please enter a description for the fish!`)
+            setDialogText(`Fish habitat description field cannot be blank! Please enter a habitat description for the fish!`)
+            handleOpen();
+        }
+        else if (fishInput.feeding_preferences === ``) {
+            console.log(`no!`);
+            setDialogText(`Fish feeding preference field cannot be blank! Please enter a feeding preference for the fish!`)
             handleOpen();
         }
         else if (fishInput.image_url === ``) {
@@ -94,11 +100,22 @@ function AdminFishForm() {
                         multiline
                         maxRows={3}
                         minRows={3}
-                        helperText="Description (* required)"
-                        placeholder="Description"
+                        helperText="Habitat (* required)"
+                        placeholder="Habitat"
                         type="text"
-                        value={fishInput.description}
-                        onChange={(e) => setFishInput({ ...fishInput, description: e.target.value })}
+                        value={fishInput.habitat}
+                        onChange={(e) => setFishInput({ ...fishInput, habitat: e.target.value })}
+                    />
+                    <TextField
+                        required
+                        multiline
+                        maxRows={3}
+                        minRows={3}
+                        helperText="Feeding Preferences (* required)"
+                        placeholder="Feeding Preferences"
+                        type="text"
+                        value={fishInput.feeding_preferences}
+                        onChange={(e) => setFishInput({ ...fishInput, feeding_preferences: e.target.value })}
                     />
                     <TextField
                         required
