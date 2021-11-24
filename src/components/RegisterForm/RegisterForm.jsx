@@ -24,6 +24,7 @@ function RegisterForm() {
     //checks if user has enter the same password twice
     //dispatch registration if pw is correct
     if (newUser.password === newUser.confirmPassword) {
+      console.log(`dispatched register`)
       dispatch({
         type: 'REGISTER',
         payload: {
@@ -32,6 +33,7 @@ function RegisterForm() {
           email: newUser.email,
         },
       });
+      console.log(`after dispatch`);
       //if not, reset pw input and prompt user to re-enter both pw
     } else {
       alert(`Passwords don't match! Please re-enter matching passwords.`);

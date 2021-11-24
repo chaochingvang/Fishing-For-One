@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useSwipeable } from 'react-swipeable';
-import { Button, Box, Card, TextField, Autocomplete, InputAdornment } from '@mui/material';
+import { Button, IconButton, Box, Card, TextField, Autocomplete, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 import './FishPage.css';
 
@@ -58,8 +59,6 @@ function FishPage() {
 
     return (<>
         <div className="fishPage">
-            <h1>Fish Page</h1>
-
             <Autocomplete
                 disablePortal
                 // value={searchItem}
@@ -68,32 +67,37 @@ function FishPage() {
                 options={searchFishList}
                 sx={{
                     width: '80%',
-                    margin: 'auto',
+                    margin: '2em auto 1em',
                 }}
 
-                renderInput={(params) => <TextField {...params} InputProps={{ ...params.InputProps, startAdornment: (<><InputAdornment position="start"><SearchIcon /></InputAdornment> {params.InputProps.startAdornment}</>) }} label="Fish" />}
+                renderInput={(params) => <TextField {...params} InputProps={{ ...params.InputProps, startAdornment: (<><InputAdornment position="start"><SearchIcon /></InputAdornment> {params.InputProps.startAdornment}</>) }} label="Fish Search" />}
                 // newValue is the value of the option selected
                 onChange={(event, newValue) => handleChange(newValue)}
             />
-
+            <h1>Fish Info</h1>
             <table style={{
                 textAlign: "center"
             }}>
                 <tbody>
                     <tr>
                         <td>
-                            <Button
-                                variant="contained"
+                            <IconButton
+                                aria-label="back"
+                                size='large'
                                 onClick={handleBack}
+                                sx={{
+                                    display: 'flex',
+                                    flexDirection: 'column'
+                                }}
                             >
-                                Back
-                            </Button>
+                                <NavigateBeforeIcon fontSize='inherit' />
+                                <p className="subtext">Back</p>
+                            </IconButton>
                         </td>
                         <td style={{
                             width: '100%'
                         }}>
                             <Card
-                                {...handlers}
                                 variant="outlined"
                                 sx={{
                                     width: '100%',
@@ -101,19 +105,50 @@ function FishPage() {
                                     margin: 'auto',
                                     backgroundColor: '#b2dfdb'
                                 }}>
-                                <h3>{fishList[selectedIndex]?.name}</h3>
-                                <img src={fishList[selectedIndex]?.image_url} />
-                                <p><strong>Habitat:</strong> {fishList[selectedIndex]?.habitat}</p>
-                                <p><strong>Feeding Preferences:</strong> {fishList[selectedIndex]?.feeding_preferences}</p>
+                                <h2>{fishList[selectedIndex]?.name}</h2>
                             </Card>
                         </td>
                         <td>
-                            <Button
-                                variant="contained"
+                            <IconButton
+                                aria-label="back"
+                                size='large'
                                 onClick={handleNext}
+                                sx={{
+                                    display: 'flex',
+                                    flexDirection: 'column'
+                                }}
                             >
-                                Next
-                            </Button>
+                                <NavigateNextIcon fontSize='inherit' />
+                                <p className="subtext">Next</p>
+                            </IconButton>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td
+                            colSpan={3}
+                            style={{
+                            width: '100%',
+                        }}>
+                            <Card
+                                {...handlers}
+                                variant="outlined"
+                                sx={{
+                                    width: '75%',
+                                    margin: 'auto',
+                                }}>
+                                <img height='150em' src={fishList[selectedIndex]?.image_url} />
+                            </Card>
+                            <Card variant="outlined"
+                                sx={{
+                                    width: '75%',
+                                    height: '100%',
+                                    margin: 'auto',
+                                    backgroundColor: '#b2dfdb'
+                                }}>
+                                <p><strong>Habitat:</strong> {fishList[selectedIndex]?.habitat}</p>
+                                <br />
+                                <p><strong>Feeding Preferences:</strong> {fishList[selectedIndex]?.feeding_preferences}</p>
+                            </Card>
                         </td>
                     </tr>
                 </tbody>

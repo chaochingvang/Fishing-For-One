@@ -11,6 +11,7 @@ const router = express.Router();
 // Handles Ajax request for user information if user is authenticated
 router.get('/', rejectUnauthenticated, (req, res) => {
   // Send back user object from the session (previously queried from the database)
+  console.log(`in /api/user !`);
   res.send(req.user);
 });
 
@@ -41,6 +42,7 @@ router.post('/register', (req, res, next) => {
 // this middleware will run our POST if successful
 // this middleware will send a 404 if not successful
 router.post('/login', userStrategy.authenticate('local'), (req, res) => {
+  console.log(`LOGGED IN SUCCESS and req.body is`, req.body)
   res.sendStatus(200);
 });
 

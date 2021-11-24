@@ -16,22 +16,27 @@ function* loginUser(action) {
     // send the action.payload as the body
     // the config includes credentials which
     // allow the server session to recognize the user
+    console.log(`this is loginInfo`, action.payload.loginInfo);
     yield axios.post('/api/user/login', action.payload.loginInfo, config);
+    console.log(`POSTED WITH REGISTRATION INFO`)
     // after the user has logged in
     // get the user information from the server
 
     //FETCH USER SAGA 
     //wanted response for conditional push on login
     const response = yield axios.get('/api/user', config);
+    console.log(`GRABBED GET RESPONSE.data FROM /api/user`, response.data);
     yield put({ type: 'SET_USER', payload: response.data });
 
     //if user is admin, push to /admin on login
     //else push to /journal 
-    if (response.data.access_level === 0) {
-      yield action.payload.history.push(`/admin`);
-    }
-    else {
-      yield action.payload.history.push(`/journal`);
+    if (action.payload.history !== ``) {
+      if (response.data.access_level === 0) {
+        yield action.payload.history.push(`/admin`);
+      }
+      else {
+        yield action.payload.history.push(`/journal`);
+      }
     }
   } catch (error) {
     console.log('Error with user login:', error);
