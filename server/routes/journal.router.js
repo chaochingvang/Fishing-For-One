@@ -16,7 +16,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     JOIN "fish_list" ON "fish_list".id = "journal".fish_id
     JOIN "lure_list" ON "lure_list".id = "journal".lure_id
     WHERE "user"."id" = $1
-    ORDER BY "date" DESC;
+    ORDER BY "date" DESC
+    LIMIT 20;
     `;
 
     pool

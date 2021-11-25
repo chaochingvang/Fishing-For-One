@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 
 
 //mui imports
-import { Box, Card } from '@mui/material'
+import { Box, Card, ImageListItem } from '@mui/material'
 
 
 
@@ -21,7 +21,7 @@ function JournalItem({ journalEntry }) {
     }
 
     return (<>
-        <Box sx={{
+        {/* <Box sx={{
             width: '50%',
             // height: 300,
             margin: 'auto',
@@ -36,14 +36,24 @@ function JournalItem({ journalEntry }) {
                     margin: 'auto',
                     backgroundColor: '#b2dfdb'
                 }}>
-                <h3>{journalEntry.name}</h3>
                 <img
                     src={journalEntry.image_url}
-                    alt={journalEntry.name}
-                    
+                    alt={journalEntry.image_url}
                 />
             </Card>
-        </Box>
+        </Box> */}
+        <ImageListItem sx={{margin: '.5em'}}>
+            <Card
+                onClick={() => handleCardClick(journalEntry)}
+                sx={{ border: 'solid black 1px' }}>
+            <img
+                src={`${journalEntry.image_url}?w=164&h=164&fit=crop&auto=format`}
+                srcSet={`${journalEntry.image_url}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                alt={journalEntry.image_url}
+                loading="lazy"
+            />
+            </Card>
+        </ImageListItem>
 
     </>)
 }
