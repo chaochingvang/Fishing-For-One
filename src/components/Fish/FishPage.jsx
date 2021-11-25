@@ -165,9 +165,12 @@ function FishPage() {
                     </Box>
                     <TabPanel value="1"><p>{fishList[selectedIndex]?.habitat}</p></TabPanel>
                     <TabPanel value="2"><p>{fishList[selectedIndex]?.feeding_preferences}</p></TabPanel>
-                    <TabPanel value="3">{fishCount?.map((lure, i) => (<>
-                        <p key={i}>{lure.total} caught with {lure.name}</p>
-                    </>))}</TabPanel>
+                    <TabPanel value="3">
+                        <strong>Amount of {fishList[selectedIndex]?.name} caught by users:</strong>
+                        {fishCount?.map((lure, i) => (
+                        <p key={i}>{lure.total} caught using {lure.name}</p>
+                        ))}
+                    </TabPanel>
                 </TabContext>
             </Box>
 
