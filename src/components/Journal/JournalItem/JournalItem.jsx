@@ -21,27 +21,6 @@ function JournalItem({ journalEntry }) {
     }
 
     return (<>
-        {/* <Box sx={{
-            width: '50%',
-            // height: 300,
-            margin: 'auto',
-            padding: '1em'
-        }}>
-            <Card
-                onClick={() => handleCardClick(journalEntry)}
-                variant="outlined"
-                sx={{
-                    width: '100%',
-                    height: '100%',
-                    margin: 'auto',
-                    backgroundColor: '#b2dfdb'
-                }}>
-                <img
-                    src={journalEntry.image_url}
-                    alt={journalEntry.image_url}
-                />
-            </Card>
-        </Box> */}
         <ImageListItem sx={{margin: '.5em'}}>
             <Card
                 onClick={() => handleCardClick(journalEntry)}

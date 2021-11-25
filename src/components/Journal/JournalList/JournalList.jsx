@@ -13,10 +13,10 @@ function JournalList() {
 
     return (<>
         <h1>Journal List!</h1>
+        <p>Click on images to see details</p>
 
         <div className="journals">
             <ImageList sx={{ width: '95%'}} cols={2} rowHeight='auto'>
-
                 {journalList?.map(journalEntry => (
                     <JournalItem
                         key={journalEntry.id}
