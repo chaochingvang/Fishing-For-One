@@ -1,22 +1,35 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useSwipeable } from 'react-swipeable';
-import { Button, IconButton, Box, Card, TextField, Autocomplete, InputAdornment } from '@mui/material';
+import { IconButton, Box, Card, TextField, Autocomplete, InputAdornment } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
 
 import './FishPage.css';
+import { StoreTwoTone } from "@mui/icons-material";
 
 
 function FishPage() {
+    const dispatch = useDispatch();
     const fishList = useSelector(store => store.fish.fishList);
+    const fishCount = useSelector(store => store.fish.fishCount);
     const [selectedIndex, setSelectedIndex] = useState(0);
+    const [tabsValue, setTabsValue] = useState('1');
+
+    useEffect(() => {
+        dispatch({ type: `FETCH_FISH_COUNT`, payload: fishList[selectedIndex]?.id });
+    }, [selectedIndex]);
+
+
+
 
     //adding labels into each fish in fishList to allow for autocomplete search
     const searchFishList = fishList.map(fish => ({ ...fish, label: fish.name }))
-
-    const [searchItem, setSearchItem] = useState(searchFishList[selectedIndex]);
 
     const handlers = useSwipeable({
         onSwipedLeft: () => handleNext(),
@@ -56,6 +69,16 @@ function FishPage() {
         }
     }
 
+    const handleTabs = (event, newValue) => {
+        setTabsValue(newValue);
+        if (selectedIndex === 0) {
+            setSelectedIndex(0);
+        }
+    };
+
+
+    // console.log(fishList[selectedIndex].id);
+
 
     return (<>
         <div className="fishPage">
@@ -74,9 +97,8 @@ function FishPage() {
                 // newValue is the value of the option selected
                 onChange={(event, newValue) => handleChange(newValue)}
             />
-            <h1>Fish Info</h1>
             <table style={{
-                textAlign: "center"
+                textAlign: "center",
             }}>
                 <tbody>
                     <tr>
@@ -97,16 +119,14 @@ function FishPage() {
                         <td style={{
                             width: '100%'
                         }}>
-                            <Card
-                                variant="outlined"
+                            <Box
                                 sx={{
                                     width: '100%',
                                     height: '100%',
                                     margin: 'auto',
-                                    backgroundColor: '#b2dfdb'
                                 }}>
                                 <h2>{fishList[selectedIndex]?.name}</h2>
-                            </Card>
+                            </Box>
                         </td>
                         <td>
                             <IconButton
@@ -123,36 +143,34 @@ function FishPage() {
                             </IconButton>
                         </td>
                     </tr>
-                    <tr>
-                        <td
-                            colSpan={3}
-                            style={{
-                            width: '100%',
-                        }}>
-                            <Card
-                                {...handlers}
-                                variant="outlined"
-                                sx={{
-                                    width: '75%',
-                                    margin: 'auto',
-                                }}>
-                                <img height='150em' src={fishList[selectedIndex]?.image_url} />
-                            </Card>
-                            <Card variant="outlined"
-                                sx={{
-                                    width: '75%',
-                                    height: '100%',
-                                    margin: 'auto',
-                                    backgroundColor: '#b2dfdb'
-                                }}>
-                                <p><strong>Habitat:</strong> {fishList[selectedIndex]?.habitat}</p>
-                                <br />
-                                <p><strong>Feeding Preferences:</strong> {fishList[selectedIndex]?.feeding_preferences}</p>
-                            </Card>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
+            <Card
+                {...handlers}
+                variant="outlined"
+                sx={{
+                    width: '90%',
+                    margin: 'auto',
+                }}>
+                <img height='150em' src={fishList[selectedIndex]?.image_url} />
+            </Card>
+            <Box sx={{ width: '90%', typography: 'body1', margin: '1em auto' }}>
+                <TabContext value={tabsValue}>
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                        <TabList onChange={handleTabs} aria-label="lab API tabs example" centered variant="fullWidth">
+                            <Tab label="Habitat" value="1" />
+                            <Tab label="Feeding Preferences" value="2" />
+                            <Tab label="Catch History" value="3" />
+                        </TabList>
+                    </Box>
+                    <TabPanel value="1"><p>{fishList[selectedIndex]?.habitat}</p></TabPanel>
+                    <TabPanel value="2"><p>{fishList[selectedIndex]?.feeding_preferences}</p></TabPanel>
+                    <TabPanel value="3">{fishCount?.map((lure, i) => (<>
+                        <p key={i}>{lure.total} caught with {lure.name}</p>
+                    </>))}</TabPanel>
+                </TabContext>
+            </Box>
+
         </div>
     </>)
 }

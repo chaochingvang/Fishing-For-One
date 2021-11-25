@@ -48,7 +48,6 @@ function App() {
     dispatch({ type: 'FETCH_USER' });
     dispatch({ type: 'FETCH_FISH' });
     dispatch({ type: `FETCH_LURE` });
-    dispatch({ type: `FETCH_JOURNAL` });
   }, [dispatch]);
 
   return (

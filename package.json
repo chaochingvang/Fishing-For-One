@@ -8,6 +8,7 @@
     "@emotion/styled": "^11.6.0",
     "@fontsource/roboto": "^4.5.1",
     "@mui/icons-material": "^5.1.0",
+    "@mui/lab": "^5.0.0-alpha.56",
     "@mui/material": "^5.1.0",
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",

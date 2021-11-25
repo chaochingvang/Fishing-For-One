@@ -45,11 +45,33 @@ function* addFish(action) {
     }
 }
 
+function* fetchFishCount(action) {
+    try {
+        if (action.payload === undefined) {
+            console.log(`action.payload is undefined`);
+            const response = yield axios.get(`/api/fish/count/${`first_row`}`);
+            console.log(response.data);
+            yield put({ type: `SET_FISH_COUNT`, payload: response.data });
+        }
+        else {
+            console.log(`action.payload is not undefined and is`, action.payload)
+            const response = yield axios.get(`/api/fish/count/${action.payload}`);
+            console.log(response.data);
+            yield put({ type: `SET_FISH_COUNT`, payload: response.data });
+        }
+        
+    } catch (err) {
+        console.error(err);
+        yield put({ type: `ERROR_FETCH_FISH_COUNT` });
+    }
+}
+
 function* fishSaga() {
     yield takeLatest(`FETCH_FISH`, fetchFish);
     yield takeLatest(`DELETE_FISH`, deleteFish);
     yield takeLatest(`EDIT_FISH`, editFish);
     yield takeLatest(`ADD_FISH`, addFish)
+    yield takeLatest(`FETCH_FISH_COUNT`, fetchFishCount);
 }
 
 

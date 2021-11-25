@@ -18,7 +18,17 @@ const selectedFish = (state = {status: 'empty'}, action) => {
     }
 }
 
+const fishCount = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_FISH_COUNT':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     fishList,
     selectedFish,
+    fishCount,
 });
