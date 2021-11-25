@@ -18,7 +18,17 @@ const selectedLure = (state = { status: 'empty' }, action) => {
     }
 }
 
+const lureCount = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_LURE_COUNT':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 export default combineReducers({
     lureList,
     selectedLure,
+    lureCount,
 });

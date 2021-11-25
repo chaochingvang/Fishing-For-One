@@ -11,7 +11,6 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 
 import './FishPage.css';
-import { StoreTwoTone } from "@mui/icons-material";
 
 
 function FishPage() {
@@ -71,20 +70,13 @@ function FishPage() {
 
     const handleTabs = (event, newValue) => {
         setTabsValue(newValue);
-        if (selectedIndex === 0) {
-            setSelectedIndex(0);
-        }
     };
-
-
-    // console.log(fishList[selectedIndex].id);
 
 
     return (<>
         <div className="fishPage">
             <Autocomplete
                 disablePortal
-                // value={searchItem}
                 id="combo-box-demo"
                 isOptionEqualToValue={(option, value) => option.id === value.id}
                 options={searchFishList}

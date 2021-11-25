@@ -46,13 +46,33 @@ function* addLure(action) {
     }
 }
 
+function* fetchLureCount(action) {
+    try {
+        if (action.payload === undefined) {
+            console.log(`action.payload is undefined`);
+            const response = yield axios.get(`/api/lure/count/${`first_row`}`);
+            console.log(response.data);
+            yield put({ type: `SET_LURE_COUNT`, payload: response.data });
+        }
+        else {
+            console.log(`action.payload is not undefined and is`, action.payload)
+            const response = yield axios.get(`/api/lure/count/${action.payload}`);
+            console.log(response.data);
+            yield put({ type: `SET_LURE_COUNT`, payload: response.data });
+        }
 
+    } catch (err) {
+        console.error(err);
+        yield put({ type: `ERROR_FETCH_LURE_COUNT` });
+    }
+}
 
 function* lureSaga() {
     yield takeLatest('FETCH_LURE', fetchLure);
     yield takeLatest(`DELETE_LURE`, deleteLure);
     yield takeLatest(`EDIT_LURE`, editLure);
-    yield takeLatest(`ADD_LURE`, addLure)
+    yield takeLatest(`ADD_LURE`, addLure);
+    yield takeLatest(`FETCH_LURE_COUNT`, fetchLureCount);
 }
 
 

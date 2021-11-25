@@ -29,6 +29,79 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         });
 });
 
+//lure COUNT GET router
+router.get(`/count/:id`, rejectUnauthenticated, (req, res) => {
+    console.log(req.params.id);
+
+    let lure_id = req.params.id;
+
+    //FIRST RENDER on useEffect so grabbing just the very first row data
+    //first query to get id of lure in first row of db
+    if (lure_id === `first_row`) {
+        let queryText = `
+            SELECT * FROM "lure_list"
+            ORDER BY "id" ASC LIMIT 1;
+        `;
+
+
+        pool
+            .query(queryText)
+            .then((result) => {
+                //2nd query to grab the total count of top 3 lures used to catch fish_id
+                console.log(`lure id of first row is `, result.rows[0].id);
+                lure_id = result.rows[0].id;
+                const values = [lure_id];
+
+                queryText = `
+                    SELECT COUNT("journal".lure_id) as "total", "name" FROM "fish_list"
+                    JOIN "journal" ON "journal".fish_id = "fish_list".id
+                    WHERE "journal".lure_id = $1
+                    GROUP BY "fish_list".name
+                    ORDER BY "total" DESC
+                    LIMIT 3;                    
+                `;
+
+
+                pool
+                    .query(queryText, values)
+                    .then((result) => {
+                        console.log(`successfully gotten count for lure id`, lure_id);
+                        res.send(result.rows);
+                    })
+                    .catch((err) => {
+                        console.error(`ERROR getting lure count for lure_id of first row`, lure_id, err);
+                        res.sendStatus(500);
+                    })
+            })
+            .catch((err) => {
+                console.error(`ERROR getting lure_list.id of first row`, err)
+            })
+    }
+    else {
+        //we already know lure_id from client side so just get count query
+        const values = [lure_id];
+        const queryText = `
+                    SELECT COUNT("journal".lure_id) as "total", "name" FROM "fish_list"
+                    JOIN "journal" ON "journal".fish_id = "fish_list".id
+                    WHERE "journal".lure_id = $1
+                    GROUP BY "fish_list".name
+                    ORDER BY "total" DESC
+                    LIMIT 3;
+                `;
+
+        pool
+            .query(queryText, values)
+            .then((result) => {
+                console.log(`successfully gotten count for lure id`, lure_id);
+                res.send(result.rows);
+            })
+            .catch((err) => {
+                console.error(`ERROR getting lure_count for lure_id `, lure_id, err);
+                res.sendStatus(500);
+            })
+    }
+})
+
 /**
  * POST route template
  */

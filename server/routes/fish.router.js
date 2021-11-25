@@ -30,6 +30,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         });
 });
 
+//fish COUNT GET router
 router.get(`/count/:id`, rejectUnauthenticated, (req, res) => {
     console.log(req.params.id);
 
@@ -101,9 +102,6 @@ router.get(`/count/:id`, rejectUnauthenticated, (req, res) => {
                 res.sendStatus(500);
             })
     }
-
-
-
 })
 
 /**
