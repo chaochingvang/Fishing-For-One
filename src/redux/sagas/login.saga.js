@@ -30,13 +30,16 @@ function* loginUser(action) {
 
     //if user is admin, push to /admin on login
     //else push to /journal 
-    if (action.payload.history !== ``) {
+    if (action.payload.firstLogin !== true) {
       if (response.data.access_level === 0) {
         yield action.payload.history.push(`/admin`);
       }
       else {
         yield action.payload.history.push(`/journal`);
       }
+    }
+    else {
+      yield action.payload.history.push(`/about`);
     }
   } catch (error) {
     console.log('Error with user login:', error);

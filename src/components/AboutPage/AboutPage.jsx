@@ -1,4 +1,6 @@
 import React from 'react';
+import { Button, Box } from '@mui/material';
+import { useHistory } from 'react-router';
 
 // This is one of our simplest components
 // It doesn't have local state,
@@ -6,13 +8,22 @@ import React from 'react';
 // or even care what the redux state is'
 
 function AboutPage() {
-  return (
+  const history = useHistory();
+  return (<>
+    <Box sx={{padding: "1em"}}>
+      <Button
+        variant="contained"
+        onClick={() => history.push('/')}
+      >
+        Back
+      </Button>
+    </Box>
     <div className="container">
       <div>
         <p>This about page is for anyone to read!</p>
       </div>
     </div>
-  );
+  </>);
 }
 
 export default AboutPage;
