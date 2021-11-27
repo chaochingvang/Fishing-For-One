@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useSwipeable } from 'react-swipeable';
-import { IconButton, Box, Card, TextField, Autocomplete, InputAdornment } from '@mui/material';
+import { IconButton, Box, Card, TextField, Autocomplete, InputAdornment, Typography } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
@@ -116,7 +116,7 @@ function LurePage() {
                                     height: '100%',
                                     margin: 'auto',
                                 }}>
-                                <h2>{lureList[selectedIndex]?.name}</h2>
+                                <Typography variant="h4">{lureList[selectedIndex]?.name}</Typography>
                             </Box>
                         </td>
                         <td>
@@ -154,7 +154,7 @@ function LurePage() {
                             <Tab label="Catch History" value="3" />
                         </TabList>
                     </Box>
-                    <Box sx={{border: 'solid black 1px', width: '90%', margin: 'auto', textAlign: 'left'}}>
+                    <Box sx={{width: '90%', margin: 'auto', textAlign: 'left'}}>
                     <TabPanel value="1">
                         <p>{lureList[selectedIndex]?.description}</p>
                     </TabPanel>

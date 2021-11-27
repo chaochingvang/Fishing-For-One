@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 
 import JournalItem from '../JournalItem/JournalItem';
 import ImageList from '@mui/material/ImageList';
+import { Typography, Box } from "@mui/material";
 
 import './JournalList.css';
 
@@ -12,11 +13,14 @@ function JournalList() {
     console.log(`this is journalList`, journalList);
 
     return (<>
-        <h1>Journal List!</h1>
-        <p>Click on images to see details</p>
+        <Box sx={{textAlign: 'center'}}>
+            <Typography variant="h3">Journal List!</Typography>
+            
+            <Typography variant="caption">Click on images to see details</Typography>
+        </Box>
 
         <div className="journals">
-            <ImageList sx={{ width: '95%'}} cols={2} rowHeight='auto'>
+            <ImageList sx={{ width: '95%' }} cols={2} rowHeight='auto'>
                 {journalList?.map(journalEntry => (
                     <JournalItem
                         key={journalEntry.id}

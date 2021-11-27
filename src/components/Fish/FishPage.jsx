@@ -9,6 +9,7 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+import { Typography } from "@mui/material";
 
 import './FishPage.css';
 
@@ -117,7 +118,7 @@ function FishPage() {
                                     height: '100%',
                                     margin: 'auto',
                                 }}>
-                                <h2>{fishList[selectedIndex]?.name}</h2>
+                                <Typography variant="h4">{fishList[selectedIndex]?.name}</Typography>
                             </Box>
                         </td>
                         <td>
@@ -155,7 +156,7 @@ function FishPage() {
                             <Tab label="Catch History" value="3" />
                         </TabList>
                     </Box>
-                    <Box sx={{ border: 'solid black 1px', width: '90%', margin: 'auto', textAlign: 'left' }}>
+                    <Box sx={{width: '90%', margin: 'auto', textAlign: 'left' }}>
                     <TabPanel value="1"><p>{fishList[selectedIndex]?.habitat}</p></TabPanel>
                     <TabPanel value="2"><p>{fishList[selectedIndex]?.feeding_preferences}</p></TabPanel>
                     <TabPanel value="3">
