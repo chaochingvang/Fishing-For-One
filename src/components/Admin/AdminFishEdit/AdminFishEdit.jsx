@@ -1,8 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 //mui
-import { TextField, FormControl, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
+import { TextField, FormControl, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Box, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 
 
 function AdminFishEdit() {
@@ -59,25 +61,24 @@ function AdminFishEdit() {
     //end success alert code block
 
     return (<>
-        <h1>FISH EDIT</h1>
         {(fish.status === 'empty')
             ? <>
-                <Button
-                    variant="contained"
-                    onClick={() => history.push('/admin/fish')}
-                >
-                    Back to Fish List
-                </Button>
-                <h1>NO FISH SELECTED</h1>
+                <Redirect to="/admin/fish" />
             </>
             :
             <>
-                <Button
-                    variant="contained"
-                    onClick={() => history.push('/admin/fish')}
-                >
-                    Back to Fish List
-                </Button>
+                <Box sx={{ padding: "1em" }}>
+                    <Button
+                        startIcon={<ArrowBackOutlinedIcon />}
+                        variant="contained"
+                        onClick={() => history.push('/admin/fish')}
+                    >
+                        Back to Fish List
+                    </Button>
+                </Box>
+                <Box sx={{ margin: "auto", textAlign: "center", paddingBottom: "1em" }}>
+                    <Typography variant="h4">Edit Fish</Typography>
+                </Box>
                 <div className="formContainer">
                     <form onSubmit={handleSubmit}>
                         <FormControl fullWidth={true}>
