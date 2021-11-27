@@ -155,14 +155,16 @@ function FishPage() {
                             <Tab label="Catch History" value="3" />
                         </TabList>
                     </Box>
+                    <Box sx={{ border: 'solid black 1px', width: '90%', margin: 'auto', textAlign: 'left' }}>
                     <TabPanel value="1"><p>{fishList[selectedIndex]?.habitat}</p></TabPanel>
                     <TabPanel value="2"><p>{fishList[selectedIndex]?.feeding_preferences}</p></TabPanel>
                     <TabPanel value="3">
-                        <strong>Amount of {fishList[selectedIndex]?.name} caught by users:</strong>
+                        <p style={{textAlign: 'center'}}><strong>Amount of {fishList[selectedIndex]?.name} caught by users:</strong></p><br />
                         {fishCount?.map((lure, i) => (
                         <p key={i}>{lure.total} caught using {lure.name}</p>
                         ))}
                     </TabPanel>
+                    </Box>
                 </TabContext>
             </Box>
 

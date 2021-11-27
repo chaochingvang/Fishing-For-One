@@ -154,15 +154,21 @@ function LurePage() {
                             <Tab label="Catch History" value="3" />
                         </TabList>
                     </Box>
-                    <TabPanel value="1"><p>{lureList[selectedIndex]?.description}</p></TabPanel>
-                    <TabPanel value="2"><p>{lureList[selectedIndex]?.technique}</p><br/>
-                    <p><strong>Target:</strong> {lureList[selectedIndex]?.target_fish}</p></TabPanel>
+                    <Box sx={{border: 'solid black 1px', width: '90%', margin: 'auto', textAlign: 'left'}}>
+                    <TabPanel value="1">
+                        <p>{lureList[selectedIndex]?.description}</p>
+                    </TabPanel>
+                    <TabPanel value="2">
+                        <p>{lureList[selectedIndex]?.technique}</p><br />
+                        <p><strong>Target:</strong> {lureList[selectedIndex]?.target_fish}</p>
+                        </TabPanel>
                     <TabPanel value="3">
-                        <strong>Amount of times users used {lureList[selectedIndex]?.name} to catch fish:</strong>
+                        <p style={{textAlign: 'center'}}><strong>Amount of times users used {lureList[selectedIndex]?.name} to catch fish:</strong></p><br />
                         {lureCount?.map((fish, i) => (
                             <p key={i}>{fish.total} {fish.name} caught</p>
                         ))}
                     </TabPanel>
+                    </Box>
                 </TabContext>
             </Box>
         </div>
