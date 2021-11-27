@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
-import { PickerDropPane, PickerInline, PickerOverlay, client } from 'filestack-react';
+import { PickerDropPane} from 'filestack-react';
 
 //mui imports
 import { TextField, FormControl, Select, MenuItem, Button, Stack, InputAdornment, Box, Typography, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, IconButton } from '@mui/material';
