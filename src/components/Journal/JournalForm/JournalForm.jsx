@@ -5,7 +5,8 @@ import { format } from 'date-fns';
 
 
 //mui imports
-import { TextField, FormControl, Select, MenuItem, Button, Stack, InputAdornment } from '@mui/material';
+import { TextField, FormControl, Select, MenuItem, Button, Stack, InputAdornment, Box, Typography } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { InputLabel } from '@mui/material';
 
 import './JournalForm.css';
@@ -41,23 +42,25 @@ function JournalForm() {
         }
         else {
             console.log(journalInput.image_url);
-            
-            dispatch({ type: `ADD_NEW_ENTRY`, payload: {journalInput, history} });
+
+            dispatch({ type: `ADD_NEW_ENTRY`, payload: { journalInput, history } });
         }
 
     }
 
     return (<>
-        
-        <Button
-            variant="contained"
-            onClick={() => history.push('/journal')}
-        >
-            Cancel
-        </Button>
-        
+        <Box sx={{padding: "1em"}}>
+            <Button
+                startIcon={<ArrowBackIcon />}
+                variant="contained"
+                onClick={() => history.push('/journal')}
+            >
+                Cancel
+            </Button>
+        </Box>
+
         <div className="header">
-            <h1>Journal FORM!</h1>
+            <Typography variant="h4">Add New Journal Entry</Typography>
         </div>
 
         <div><br /></div>
