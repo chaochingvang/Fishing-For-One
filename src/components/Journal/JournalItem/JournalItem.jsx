@@ -26,7 +26,8 @@ function JournalItem({ journalEntry }) {
                 onClick={() => handleCardClick(journalEntry)}
                 sx={{ border: 'solid black 1px' }}>
             <img
-                src={`${journalEntry.image_url}?w=164&h=164&fit=crop&auto=format`}
+                // src={`${journalEntry.image_url}?w=164&h=164&fit=crop&auto=format`}
+                src={`${journalEntry.image_url}`}
                 srcSet={`${journalEntry.image_url}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                 alt={journalEntry.image_url}
                 loading="lazy"

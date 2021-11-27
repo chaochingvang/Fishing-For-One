@@ -2,8 +2,9 @@ import AdminFishItem from "../AdminFishItem/AdminFishItem";
 import { useSelector } from "react-redux";
 
 //mui
-import { TableContainer, Table, TableBody, TableCell, TableHead, TableRow, Button } from '@mui/material';
+import { TableContainer, Table, TableBody, TableCell, TableHead, TableRow, Button, Box, Typography } from '@mui/material';
 import { useHistory } from "react-router";
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 
 
 function AdminFishList() {
@@ -11,14 +12,22 @@ function AdminFishList() {
     const history = useHistory();
 
     return (<>
-        <h1>Admin FIsh List</h1>
 
-        <Button
-            variant="contained"
-            onClick={() => history.push(`/admin/fish/form`)}
-        >
-            Add New Fish
-        </Button>
+        <Box sx={{margin: "auto", textAlign: "center", paddingTop: "1em"}}>
+            <Typography variant="h4">Admin Fish List</Typography>
+        </Box>
+        <Box sx={{
+            padding: "1em",
+            textAlign: "center"
+        }}>
+            <Button
+                startIcon={<AddOutlinedIcon />}
+                variant="contained"
+                onClick={() => history.push(`/admin/fish/form`)}
+            >
+                Add New Fish
+            </Button>
+        </Box>
 
         <TableContainer>
             <Table sx={{

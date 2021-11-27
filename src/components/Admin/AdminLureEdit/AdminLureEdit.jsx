@@ -1,9 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 //mui
-import { TextField, FormControl, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
+import { TextField, FormControl, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Box, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
-
+import { Redirect } from 'react-router-dom';
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 
 function AdminLureEdit() {
     const history = useHistory();
@@ -17,7 +18,7 @@ function AdminLureEdit() {
     const [render, setRender] = useState(false);
 
     const defaultState = {
-        id:  lure.id,
+        id: lure.id,
         name: lure.name,
         description: lure.description,
         technique: lure.technique,
@@ -30,7 +31,7 @@ function AdminLureEdit() {
 
     const handleSubmit = () => {
         console.log(`clicked`);
-        dispatch({type: `EDIT_LURE`, payload: lureInput})
+        dispatch({ type: `EDIT_LURE`, payload: lureInput })
     }
 
     //success alert code block
@@ -62,25 +63,24 @@ function AdminLureEdit() {
     console.log(lure);
 
     return (<>
-        <h1>LURE EDIT</h1>
         {(lure.status === 'empty')
             ? <>
-                <Button
-                    variant="contained"
-                    onClick={() => history.push('/admin/lure')}
-                >
-                    Back to Lure List
-                </Button>
-                <h1>NO LURE SELECTED</h1>
+                <Redirect to="/admin/lure" />
             </>
             :
             <>
-                <Button
-                    variant="contained"
-                    onClick={() => history.push('/admin/lure')}
-                >
-                    Back to Lure List
-                </Button>
+                <Box sx={{ padding: "1em" }}>
+                    <Button
+                        startIcon={<ArrowBackOutlinedIcon />}
+                        variant="contained"
+                        onClick={() => history.push('/admin/lure')}
+                    >
+                        Back to Lure List
+                    </Button>
+                </Box>
+                <Box sx={{ margin: "auto", textAlign: "center", paddingBottom: "1em" }}>
+                    <Typography variant="h4">Edit Lure</Typography>
+                </Box>
                 <div className="formContainer">
                     <form onSubmit={handleSubmit}>
                         <FormControl fullWidth={true}>

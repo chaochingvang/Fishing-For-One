@@ -2,8 +2,9 @@ import AdminLureItem from "../AdminLureItem/AdminLureItem";
 import { useSelector } from "react-redux";
 
 //mui
-import { TableContainer, Table, TableBody, TableCell, TableHead, TableRow, Button } from '@mui/material';
+import { Box, Typography, TableContainer, Table, TableBody, TableCell, TableHead, TableRow, Button } from '@mui/material';
 import { useHistory } from "react-router";
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 
 
 function AdminLureList() {
@@ -11,14 +12,21 @@ function AdminLureList() {
     const history = useHistory();
 
     return (<>
-        <h1>Admin Lure List</h1>
-
-        <Button
-            variant="contained"
-            onClick={() => history.push(`/admin/lure/form`)}
-        >
-            Add New Lure
-        </Button>
+        <Box sx={{ margin: "auto", textAlign: "center", paddingTop: "1em" }}>
+            <Typography variant="h4">Admin Lure List</Typography>
+        </Box>
+        <Box sx={{
+            padding: "1em",
+            textAlign: "center"
+        }}>
+            <Button
+                startIcon={<AddOutlinedIcon />}
+                variant="contained"
+                onClick={() => history.push(`/admin/lure/form`)}
+            >
+                Add New Lure
+            </Button>
+        </Box>
 
         <TableContainer>
             <Table sx={{
