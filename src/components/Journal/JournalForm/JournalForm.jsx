@@ -1,11 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
 
 
 //mui imports
-import { TextField, FormControl, Select, MenuItem, Button, Stack, InputAdornment, Box, Typography } from '@mui/material';
+import { TextField, FormControl, Select, MenuItem, Button, Stack, InputAdornment, Box, Typography, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { InputLabel } from '@mui/material';
 
@@ -15,6 +15,11 @@ function JournalForm() {
 
     const history = useHistory();
     const dispatch = useDispatch();
+
+    //success alert states
+    const isSuccessful = useSelector(store => store.success.isSuccessful);
+    const [dialogText, setDialogText] = useState(``);
+    const [open, setOpen] = useState(false);
 
     //grabbing reducers from store
     const fishList = useSelector(store => store.fish.fishList);
@@ -32,20 +37,61 @@ function JournalForm() {
     }
     const [journalInput, setJournalInput] = useState(initialState);
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(`clicked!`);
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     console.log(`clicked!`);
 
-        if ((journalInput.fish_id === ``) ||
-            (journalInput.lure_id === ``)) {
-            alert(`Please enter all the required information!`)
+    //     if ((journalInput.fish_id === ``) ||
+    //         (journalInput.lure_id === ``)) {
+    //         alert(`Please enter all the required information!`)
+    //     }
+    //     else {
+    //         console.log(journalInput.image_url);
+
+    //         dispatch({ type: `ADD_NEW_ENTRY`, payload: { journalInput, history } });
+    //     }
+    // }
+
+    useEffect(() => {
+        status();
+    }, [isSuccessful]);
+
+    const status = () => {
+        if (isSuccessful) {
+            setDialogText(`New journal entry successfully added!`)
+            handleOpen();
+        }
+    }
+
+    const handleOpen = () => {
+        setOpen(true);
+    }
+
+    const handleClose = () => {
+        setOpen(false);
+
+        if (isSuccessful) {
+            history.push(`/journal`);
+            dispatch({ type: `RESET_IS_SUCCESSFUL` });
+        }
+    }
+
+    const handleSubmit = () => {
+        console.log(`clicked`);
+
+        if (journalInput.fish_id === ``) {
+            console.log(`no!`);
+            setDialogText(`Fish type cannot be blank! Please select a fish type.`)
+            handleOpen();
+        }
+        else if (journalInput.lure_id === ``) {
+            console.log(`no!`);
+            setDialogText(`Lure type cannot be blank! Please select a lure type!`)
+            handleOpen();
         }
         else {
-            console.log(journalInput.image_url);
-
-            dispatch({ type: `ADD_NEW_ENTRY`, payload: { journalInput, history } });
+            dispatch({ type: `ADD_NEW_ENTRY`, payload: journalInput });
         }
-
     }
 
     return (<>
@@ -184,6 +230,22 @@ function JournalForm() {
                 </FormControl>
             </form>
         </div>
+        <Dialog
+            open={open}
+            onClose={handleClose}
+        >
+            <DialogTitle>
+                {isSuccessful ? <>SUCCESS!</> : <>ERROR!</>}
+            </DialogTitle>
+            <DialogContent>
+                <DialogContentText>
+                    {dialogText}
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleClose}>Back</Button>
+            </DialogActions>
+        </Dialog>
     </>)
 }
 
