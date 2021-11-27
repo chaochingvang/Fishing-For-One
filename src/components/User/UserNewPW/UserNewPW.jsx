@@ -1,7 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
-import { Button, TextField, FormControl, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Box } from '@mui/material';
+import {
+    Button,
+    TextField,
+    FormControl,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogContentText,
+    DialogActions,
+    Box,
+    Typography,
+} from '@mui/material';
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import { useEffect, useState } from "react";
 
 function UserNewPW() {
@@ -10,7 +22,7 @@ function UserNewPW() {
 
     const isSuccessful = useSelector(store => store.success.isSuccessful);
 
-    
+
     const [open, setOpen] = useState(false);
     const [dialogText, setDialogText] = useState(``);
     const [newPW, setNewPW] = useState(``);
@@ -67,22 +79,28 @@ function UserNewPW() {
     console.log(`isSuccess`, isSuccessful);
 
     return (<>
-
-        <Button
-            variant="contained"
-            onClick={() => history.push(`/user`)}
-        >
-            Cancel
-        </Button>
+        <Box sx={{ padding: "1em" }}>
+            <Button
+                startIcon={<ArrowBackOutlinedIcon />}
+                variant="contained"
+                onClick={() => history.push(`/user`)}
+            >
+                Cancel
+            </Button>
+        </Box>
         <Box sx={{
-            margin: 'auto',
-            textAlign: 'center'
+            textAlign: "center",
+            margin: "auto",
+            paddingBottom: "1em"
         }}>
-
-            <h1>Change PW</h1>
-
+            <Typography variant="h3">Change Password</Typography>
+        </Box>
+        <Box sx={{
+            margin: "auto",
+            textAlign: "center"
+        }}>
             <form onSubmit={handleSubmit}>
-                <FormControl sx={{ width: '80%' }}>
+                <FormControl sx={{ width: "80%" }}>
                     <TextField
                         required
                         placeholder="Enter New Password"

@@ -1,8 +1,9 @@
 import React from 'react';
-import LogOutButton from '../../LogOutButton/LogOutButton';
 import { useSelector } from 'react-redux';
-import { IconButton, Button } from '@mui/material';
+import { IconButton, Button, Box, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 
 
 import './UserPage.css';
@@ -13,11 +14,20 @@ function UserPage() {
   const user = useSelector((store) => store.user);
   const history = useHistory();
 
-  console.log(user);
-
-  return (
+  return (<>
+    <Box sx={{ padding: "1em" }}>
+      <Button
+        startIcon={<ArrowBackOutlinedIcon />}
+        variant="contained"
+        onClick={() => history.push(`/journal`)}
+      >
+        Back
+      </Button>
+    </Box>
+    <Box sx={{padding: "1em", margin: "auto", textAlign: "center"}}>
+      <Typography variant="h2">User Info</Typography>
+    </Box>
     <div className="userPageContainer">
-      <h1>User Info</h1>
       <br /><br/>
       <p>Username</p>
       <h3>{user.username}</h3>
@@ -50,13 +60,14 @@ function UserPage() {
       
       <br /><br />
       <Button
+        endIcon={<LockOutlinedIcon />}
         variant="contained"
         onClick={() => history.push(`/user/password`)}
       >
         Change Password
       </Button>
     </div>
-  );
+  </>);
 }
 
 // this allows us to use <App /> in index.js

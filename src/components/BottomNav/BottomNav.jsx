@@ -7,7 +7,7 @@ import { useHistory } from 'react-router';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import LogoutIcon from '@mui/icons-material/Logout';
-import InfoIcon from '@mui/icons-material/Info';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { ReactComponent as FishIcon } from '../../icons/fish.svg';
 import { ReactComponent as LureIcon } from '../../icons/lure.svg';
 import CheckIcon from '@mui/icons-material/Check';
@@ -118,7 +118,7 @@ function BottomNav(props) {
                             <Button
                                 onClick={handleAbout}
                                 variant="contained"
-                                startIcon={<InfoIcon />}
+                                startIcon={<InfoOutlinedIcon />}
                             >
                                 About App
                             </Button>

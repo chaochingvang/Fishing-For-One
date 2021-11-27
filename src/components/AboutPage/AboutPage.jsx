@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Box } from '@mui/material';
 import { useHistory } from 'react-router';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 // This is one of our simplest components
 // It doesn't have local state,
@@ -12,6 +13,7 @@ function AboutPage() {
   return (<>
     <Box sx={{padding: "1em"}}>
       <Button
+        startIcon={<ArrowBackIcon />}
         variant="contained"
         onClick={() => history.push('/')}
       >

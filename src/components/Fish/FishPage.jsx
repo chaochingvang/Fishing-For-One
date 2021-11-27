@@ -118,7 +118,7 @@ function FishPage() {
                                     height: '100%',
                                     margin: 'auto',
                                 }}>
-                                <Typography variant="h4">{fishList[selectedIndex]?.name}</Typography>
+                                <Typography variant="h5">{fishList[selectedIndex]?.name}</Typography>
                             </Box>
                         </td>
                         <td>

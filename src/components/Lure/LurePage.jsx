@@ -116,7 +116,7 @@ function LurePage() {
                                     height: '100%',
                                     margin: 'auto',
                                 }}>
-                                <Typography variant="h4">{lureList[selectedIndex]?.name}</Typography>
+                                <Typography variant="h5">{lureList[selectedIndex]?.name}</Typography>
                             </Box>
                         </td>
                         <td>

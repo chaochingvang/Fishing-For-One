@@ -1,7 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
-import { Button, TextField, FormControl, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Box } from '@mui/material';
+import {
+    Button,
+    TextField,
+    FormControl,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogContentText,
+    DialogActions,
+    Box,
+    Typography
+} from '@mui/material';
 import { useState, useEffect } from "react";
 
 function UserChangeEmail() {
@@ -42,7 +53,7 @@ function UserChangeEmail() {
         }
         else {
             console.log(`match`);
-            dispatch({ type: `CHANGE_EMAIL`, payload: {newEmail} });
+            dispatch({ type: `CHANGE_EMAIL`, payload: { newEmail } });
         }
     }
 
@@ -72,24 +83,23 @@ function UserChangeEmail() {
     }
 
     return (<>
-        <h1>CHANGE EMAIL</h1>
-        <Button
-            variant="contained"
-            onClick={() => history.push(`/user`)}
-        >
-            Cancel
-        </Button>
-        <Box sx={{
-            margin: 'auto',
-            textAlign: 'center'
-        }}>
-            <h3>Current Email</h3>
-            <h4>{user.email}</h4>
-            <br />
-
-
+        <Box sx={{ padding: "1em" }}>
+            <Button
+                variant="contained"
+                onClick={() => history.push(`/user`)}
+            >
+                Cancel
+            </Button>
+        </Box>
+        <Box sx={{ textAlign: "center", margin: "auto", paddingBottom: "1em" }}>
+            <Typography variant="h3">Change Email</Typography>
+            <br /> <br />
+            <Typography variant="h6">{user.email}</Typography>
+            <Typography variant="caption">Current Email</Typography>
+        </Box>
+        <Box sx={{ margin: "auto", textAlign: "center"}}>
             <form onSubmit={handleSubmit}>
-                <FormControl sx={{ width: '80%' }}>
+                <FormControl sx={{ width: "80%" }}>
                     <TextField
                         required
                         placeholder="Enter New Email"
