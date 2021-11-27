@@ -15,7 +15,6 @@ function JournalList() {
     return (<>
         <Box sx={{textAlign: 'center'}}>
             <Typography variant="h3">Journal List!</Typography>
-            
             <Typography variant="caption">Click on images to see details</Typography>
         </Box>
 

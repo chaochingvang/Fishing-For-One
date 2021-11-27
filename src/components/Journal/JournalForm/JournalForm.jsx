@@ -2,11 +2,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
-
+import { PickerDropPane, PickerInline, PickerOverlay, client } from 'filestack-react';
 
 //mui imports
-import { TextField, FormControl, Select, MenuItem, Button, Stack, InputAdornment, Box, Typography, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
+import { TextField, FormControl, Select, MenuItem, Button, Stack, InputAdornment, Box, Typography, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, IconButton } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 import { InputLabel } from '@mui/material';
 
 import './JournalForm.css';
@@ -20,6 +21,7 @@ function JournalForm() {
     const isSuccessful = useSelector(store => store.success.isSuccessful);
     const [dialogText, setDialogText] = useState(``);
     const [open, setOpen] = useState(false);
+    const [openUploader, setOpenUploader] = useState(false);
 
     //grabbing reducers from store
     const fishList = useSelector(store => store.fish.fishList);
@@ -94,8 +96,15 @@ function JournalForm() {
         }
     }
 
+    const handleUploadDone = (result) => {
+        setJournalInput({ ...journalInput, image_url: (result.filesUploaded[0].url) })
+        // setOpenUploader(false);
+    }
+
+    console.log(journalInput);
+
     return (<>
-        <Box sx={{padding: "1em"}}>
+        <Box sx={{ padding: "1em" }}>
             <Button
                 startIcon={<ArrowBackIcon />}
                 variant="contained"
@@ -204,12 +213,26 @@ function JournalForm() {
                         />
                     </Stack>
                     <br />
-                    <TextField
-                        label="Image URL"
-                        helperText="image URL (optional)"
-                        value={journalInput.image_url}
-                        onChange={(e) => setJournalInput({ ...journalInput, image_url: e.target.value })}
-                    />
+                    <Stack direction="row">
+                        <TextField
+                            sx={{width: "100%"}}
+                            label="Image URL"
+                            helperText="image URL (optional)"
+                            value={journalInput.image_url}
+                            onChange={(e) => setJournalInput({ ...journalInput, image_url: e.target.value })}
+                        />
+                        <IconButton
+                            aria-label="upload"
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column'
+                            }}
+                            onClick={() => setOpenUploader(true)}
+                        >
+                            <AddPhotoAlternateOutlinedIcon />
+                            <p className="subtext">Upload Image</p>
+                        </IconButton>
+                    </Stack>
                     <br />
                     <TextField
                         multiline
@@ -223,13 +246,26 @@ function JournalForm() {
                     <Button
                         type="submit"
                         variant="contained"
-                        onClick={handleSubmit}
                     >
                         Submit
                     </Button>
                 </FormControl>
             </form>
         </div>
+
+        <Dialog
+            open={openUploader}
+            onClose={() => setOpenUploader(false)}
+        >
+            <DialogTitle sx={{textAlign: "center"}}>Upload Image</DialogTitle>
+            <Box>
+                <PickerDropPane
+                    apikey={process.env.REACT_APP_FILESTACK_API_KEY}
+                    onUploadDone={(result) => handleUploadDone(result)}
+                />
+            </Box>
+        </Dialog>
+
         <Dialog
             open={open}
             onClose={handleClose}
