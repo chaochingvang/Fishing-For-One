@@ -1,17 +1,24 @@
 import LogOutButton from '../../LogOutButton/LogOutButton';
 import { useHistory } from 'react-router';
+import { useEffect } from 'react';
 
 //mui imports
 import { Box, Card, Button } from '@mui/material'
 
 import './AdminPage.css';
+import { useDispatch } from 'react-redux';
 
 
 
 
 function AdminPage() {
     const history = useHistory();
+    const dispatch = useDispatch();
 
+    useEffect(() => {
+        dispatch({ type: 'FETCH_FISH' });
+        dispatch({ type: `FETCH_LURE` });
+    }, [dispatch]);
 
     return (<>
         <h1>ADMIN PAGE</h1>

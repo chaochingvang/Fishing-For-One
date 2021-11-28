@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { useState, useEffect } from 'react';
 import { format } from 'date-fns';
-import { PickerDropPane} from 'filestack-react';
+import { PickerDropPane } from 'filestack-react';
 
 //mui imports
 import { TextField, FormControl, Select, MenuItem, Button, Stack, InputAdornment, Box, Typography, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, IconButton } from '@mui/material';
@@ -38,21 +38,6 @@ function JournalForm() {
         comments: '',
     }
     const [journalInput, setJournalInput] = useState(initialState);
-
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     console.log(`clicked!`);
-
-    //     if ((journalInput.fish_id === ``) ||
-    //         (journalInput.lure_id === ``)) {
-    //         alert(`Please enter all the required information!`)
-    //     }
-    //     else {
-    //         console.log(journalInput.image_url);
-
-    //         dispatch({ type: `ADD_NEW_ENTRY`, payload: { journalInput, history } });
-    //     }
-    // }
 
     useEffect(() => {
         status();
@@ -215,7 +200,7 @@ function JournalForm() {
                     <br />
                     <Stack direction="row">
                         <TextField
-                            sx={{width: "100%"}}
+                            sx={{ width: "100%" }}
                             label="Image URL"
                             helperText="image URL (optional)"
                             value={journalInput.image_url}
@@ -254,16 +239,19 @@ function JournalForm() {
         </div>
 
         <Dialog
+            fullWidth={true}
             open={openUploader}
             onClose={() => setOpenUploader(false)}
         >
-            <DialogTitle sx={{textAlign: "center"}}>Upload Image</DialogTitle>
-            <Box>
+            <DialogTitle sx={{ textAlign: "center" }}>Upload Image</DialogTitle>
+
+            <Box sx={{ padding: "1em", width: "82%" }}>
                 <PickerDropPane
                     apikey={process.env.REACT_APP_FILESTACK_API_KEY}
                     onUploadDone={(result) => handleUploadDone(result)}
                 />
             </Box>
+
         </Dialog>
 
         <Dialog
