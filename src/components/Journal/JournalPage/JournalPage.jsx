@@ -15,6 +15,8 @@ function JournalPage() {
 
     useEffect(() => {
         dispatch({ type: `FETCH_JOURNAL` });
+        dispatch({ type: 'FETCH_FISH' });
+        dispatch({ type: `FETCH_LURE` });
     }, [dispatch]);
 
     return (<>

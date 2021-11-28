@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 
+import { Box, Typography, TextField, Button, FormControl } from '@mui/material';
+
 function RegisterForm() {
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
@@ -48,67 +50,80 @@ function RegisterForm() {
 
   console.log(newUser);
 
-  return (
-    <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register User</h2>
-      {errors.registrationMessage && (
-        <h3 className="alert" role="alert">
-          {errors.registrationMessage}
-        </h3>
-      )}
-      <div>
-        <label htmlFor="username">
-          Username:
-          <input
-            type="text"
-            name="username"
-            value={newUser.username}
-            required
-            onChange={(event) => setNewUser({ ...newUser, username: event.target.value })}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="password">
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={newUser.password}
-            required
-            onChange={(event) => setNewUser({ ...newUser, password: event.target.value })}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="confirmPassword">
-          Re-enter Password:
-          <input
-            type="password"
-            name="confirmPassword"
-            value={newUser.confirmPassword}
-            required
-            onChange={(event) => setNewUser({ ...newUser, confirmPassword: event.target.value })}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="email">
-          Email:
-          <input
-            type="text"
-            name="email"
-            value={newUser.email}
-            required
-            onChange={(event) => setNewUser({ ...newUser, email: event.target.value })}
-          />
-        </label>
-      </div>
-      <div>
-        <input className="btn" type="submit" name="submit" value="Register" />
-      </div>
-    </form>
-  );
+  return (<>
+    <Box sx={{ padding: "1em", margin: "auto", textAlign: "center"}}>
+
+
+      <Box>
+      <form onSubmit={registerUser}>
+          <Typography variant="body1">New user? Create a new account</Typography>
+        {errors.registrationMessage && (
+          <h3 className="alert" role="alert">
+            {errors.registrationMessage}
+          </h3>
+          )}
+          <FormControl>
+        <div>
+            <TextField
+              type="text"
+                name="username"
+                helperText="Username"
+                placeholder="Username"
+                label="username"
+              value={newUser.username}
+              required
+              onChange={(event) => setNewUser({ ...newUser, username: event.target.value })}
+            />
+
+        </div>
+        <div>
+
+            <TextField
+              type="password"
+              name="password"
+              helperText="password"
+              placeholder="password"
+              label="password"
+              value={newUser.password}
+              required
+              onChange={(event) => setNewUser({ ...newUser, password: event.target.value })}
+            />
+
+        </div>
+        <div>
+
+            <TextField
+              type="password"
+              name="confirmPassword"
+              placeholder="confirm password"
+              label="confirm password"
+              helperText="confirm password"
+              value={newUser.confirmPassword}
+              required
+              onChange={(event) => setNewUser({ ...newUser, confirmPassword: event.target.value })}
+            />
+        </div>
+        <div>
+            <TextField
+              type="text"
+              name="email"
+              placeholder="email"
+              label="email"
+              helperText="email"
+              value={newUser.email}
+              required
+              onChange={(event) => setNewUser({ ...newUser, email: event.target.value })}
+            />
+        </div>
+            <Button
+              sx={{ width: "50%", margin: "auto" }}
+              variant="contained"
+              type="submit">Register</Button>
+        </FormControl>
+        </form>
+      </Box>
+    </Box>
+  </>);
 }
 
 export default RegisterForm;
