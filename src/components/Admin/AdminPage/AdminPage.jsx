@@ -3,7 +3,7 @@ import { useHistory } from 'react-router';
 import { useEffect } from 'react';
 
 //mui imports
-import { Box, Card, Button } from '@mui/material'
+import { Box, Card, Button, Typography, Stack} from '@mui/material'
 
 import './AdminPage.css';
 import { useDispatch } from 'react-redux';
@@ -21,8 +21,11 @@ function AdminPage() {
     }, [dispatch]);
 
     return (<>
-        <h1>ADMIN PAGE</h1>
+        <Box sx={{padding: "1em", margin: "auto", textAlign: "center"}}>
+            <Typography variant="h3">ADMIN PAGE</Typography>
+        </Box>
         <div className="admin">
+            <Stack direction="row">
             <Box sx={{
                 width: '50%',
                 margin: 'auto',
@@ -62,6 +65,7 @@ function AdminPage() {
                     <h2>Lure Database</h2>
                 </Card>
             </Box>
+            </Stack>
         </div>
     </>)
 }
