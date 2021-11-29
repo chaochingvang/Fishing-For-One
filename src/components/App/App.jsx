@@ -48,6 +48,7 @@ function App() {
     dispatch({ type: 'FETCH_USER' });
     dispatch({ type: 'FETCH_FISH' });
     dispatch({ type: `FETCH_LURE` });
+    dispatch({ type: `RESET_IS_SUCCESSFUL` });
   }, [dispatch]);
 
   return (
