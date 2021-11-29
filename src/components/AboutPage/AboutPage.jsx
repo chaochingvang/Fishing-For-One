@@ -56,6 +56,7 @@ function AboutPage() {
           <li>Filestack API</li>
           <li>Node.js</li>
           <li>PostgreSQL</li>
+          <li>Redux / Saga</li>
         </ul>
       </Typography>
     </Box>

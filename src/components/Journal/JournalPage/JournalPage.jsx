@@ -19,20 +19,8 @@ function JournalPage() {
         dispatch({ type: `FETCH_LURE` });
     }, [dispatch]);
 
+
     return (<>
-        {/* <Box
-            width='60%'
-            sx={{ margin: '1em auto', textAlign: 'center'}}>
-            <Card
-                variant='outlined'
-                onClick={() => history.push('/journal/form')}
-            >
-                <CardActionArea>
-                    <Typography variant="button">Caught a fish? <br /> Click here to add it to your journal entry!</Typography>
-                    <SvgIcon><FishIcon /></SvgIcon>
-            </CardActionArea>
-            </Card>
-        </Box> */}
 
         <Box
             width='70%'
@@ -58,6 +46,7 @@ function JournalPage() {
         </Box>
 
         <JournalList />
+        
 
         
     </>)

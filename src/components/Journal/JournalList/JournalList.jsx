@@ -14,7 +14,7 @@ function JournalList() {
 
     return (<>
         <Box sx={{textAlign: 'center'}}>
-            <Typography variant="h3">Journal List!</Typography>
+            <Typography variant="h3">Journal Entries</Typography>
             <Typography variant="caption">Click on images to see details</Typography>
         </Box>
 
@@ -27,6 +27,10 @@ function JournalList() {
                     />
                 ))}
             </ImageList>
+
+            {(journalList.length === 0)
+                ? <Box sx={{margin: "auto", padding: "1em", textAlign: "center"}}><Typography variant="h6">No entries yet! Click 'ADD' to add a new entry to your journal!</Typography></Box>
+                : ''}
 
         </div>
     </>)
