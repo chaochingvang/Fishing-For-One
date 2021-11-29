@@ -151,7 +151,7 @@ function LurePage() {
                         <TabList onChange={handleTabs} aria-label="lab API tabs example" centered variant="fullWidth">
                             <Tab label="Description" value="1" />
                             <Tab label="Technique" value="2" />
-                            <Tab label="Catch History" value="3" />
+                            <Tab label="Catch Info" value="3" />
                         </TabList>
                     </Box>
                     <Box sx={{width: '90%', margin: 'auto', textAlign: 'left'}}>

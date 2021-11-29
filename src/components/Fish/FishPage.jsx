@@ -153,7 +153,7 @@ function FishPage() {
                         <TabList onChange={handleTabs} aria-label="lab API tabs example" centered variant="fullWidth">
                             <Tab label="Habitat" value="1" />
                             <Tab label="Feeding Preferences" value="2" />
-                            <Tab label="Catch History" value="3" />
+                            <Tab label="Catch Info" value="3" />
                         </TabList>
                     </Box>
                     <Box sx={{width: '90%', margin: 'auto', textAlign: 'left' }}>

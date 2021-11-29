@@ -1,9 +1,27 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router';
-//mui
-import { TextField, FormControl, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Box, Typography } from '@mui/material';
-import { useState, useEffect } from 'react';
+import {
+    useState,
+    useEffect
+} from 'react';
 import { Redirect } from 'react-router-dom';
+import {
+    useSelector,
+    useDispatch
+} from 'react-redux';
+import { useHistory } from 'react-router';
+
+//mui imports
+import {
+    TextField,
+    FormControl,
+    Button,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogContentText,
+    DialogActions,
+    Box,
+    Typography
+} from '@mui/material';
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 
 
@@ -18,7 +36,7 @@ function AdminFishEdit() {
     const [open, setOpen] = useState(false);
 
     const defaultState = {
-        id:  fish.id,
+        id: fish.id,
         name: fish.name,
         habitat: fish.habitat,
         feeding_preferences: fish.feeding_preferences,
