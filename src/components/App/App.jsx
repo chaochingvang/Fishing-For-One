@@ -8,14 +8,11 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import Nav from '../Nav/Nav';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../User/UserPage/UserPage';
 import UserChangeEmail from '../User/UserChangeEmail/UserChangeEmail';
 import UserNewPW from '../User/UserNewPW/UserNewPW';
-import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import JournalPage from '../Journal/JournalPage/JournalPage';
@@ -72,14 +69,7 @@ function App() {
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-          
-          <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/info"
-          >
-            <InfoPage />
-          </ProtectedRoute>
+        
 
 
           {/* //// START USER PAGES //// */}
@@ -111,6 +101,7 @@ function App() {
             exact
             path="/admin"
           >
+            {/* if user is not admin level, redirect user to forbidden page */}
             {(user.access_level !== 0) ?
               <Redirect to="/403" />
               :
@@ -122,6 +113,7 @@ function App() {
             exact
             path="/admin/fish"
           >
+            {/* if user is not admin level, redirect user to forbidden page */}
             {(user.access_level !== 0) ?
               <Redirect to="/403" />
               :
@@ -133,6 +125,7 @@ function App() {
             exact
             path="/admin/fish/edit"
           >
+            {/* if user is not admin level, redirect user to forbidden page */}
             {(user.access_level !== 0) ?
               <Redirect to="/403" />
               :
@@ -144,6 +137,7 @@ function App() {
             exact
             path="/admin/fish/form"
           >
+            {/* if user is not admin level, redirect user to forbidden page */}
             {(user.access_level !== 0) ?
               <Redirect to="/403" />
               :
@@ -155,6 +149,7 @@ function App() {
             exact
             path="/admin/lure"
           >
+            {/* if user is not admin level, redirect user to forbidden page */}
             {(user.access_level !== 0) ?
               <Redirect to="/403" />
               :
@@ -166,6 +161,7 @@ function App() {
             exact
             path="/admin/lure/edit"
           >
+            {/* if user is not admin level, redirect user to forbidden page */}
             {(user.access_level !== 0) ?
               <Redirect to="/403" />
               :
@@ -177,6 +173,7 @@ function App() {
             exact
             path="/admin/lure/form"
           >
+            {/* if user is not admin level, redirect user to forbidden page */}
             {(user.access_level !== 0) ?
               <Redirect to="/403" />
               :
@@ -277,6 +274,7 @@ function App() {
             <h1>404 - Page Does Not Exist</h1>
           </Route>
         </Switch>
+        {/* Only show the bottom navigation if user is logged in */}
         {user.id &&
           <BottomNav />
         }
