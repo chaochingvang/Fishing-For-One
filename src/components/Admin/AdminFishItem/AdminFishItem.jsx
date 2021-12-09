@@ -3,7 +3,13 @@ import { useHistory } from 'react-router';
 import { useState } from 'react';
 
 //mui
-import { TableCell, TableRow, IconButton, Button, Stack } from '@mui/material';
+import {
+    TableCell,
+    TableRow,
+    IconButton,
+    Button,
+    Stack
+} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Dialog from '@mui/material/Dialog';
@@ -23,22 +29,26 @@ function AdminFishItem({ fish }) {
 
     const [open, setOpen] = useState(false);
 
+    //when form submitted dispatch and push user to url route
     const handleEdit = (fish) => {
         console.log('clicked edit', fish);
         dispatch({ type: `SELECTED_FISH`, payload: fish });
         history.push(`/admin/fish/edit`)
     }
 
+    //open dialog
     const handleOpen = (fish) => {
         console.log('clicked delete', fish);
         setOpen(true);
     }
 
+    //close dialog
     const handleClose = () => {
         console.log(`closing`);
         setOpen(false);
     }
 
+    //when delete is confirmed, dispatch with fish id to delete and close dialog
     const handleDelete = (fish) => {
         console.log(fish)
         dispatch({ type: `DELETE_FISH`, payload: fish.id });
@@ -81,6 +91,7 @@ function AdminFishItem({ fish }) {
         </TableRow>
 
 
+        {/* Delete confirmation dialog */}
         <Dialog
             open={open}
             onClose={handleClose}

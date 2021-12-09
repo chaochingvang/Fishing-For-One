@@ -1,22 +1,39 @@
-import { useSelector, useDispatch } from 'react-redux';
+import {
+    useState,
+    useEffect
+} from 'react';
+import { Redirect } from 'react-router-dom';
+import {
+    useSelector,
+    useDispatch
+} from 'react-redux';
 import { useHistory } from 'react-router';
 //mui
-import { TextField, FormControl, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Box, Typography } from '@mui/material';
-import { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import {
+    TextField,
+    FormControl,
+    Button,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogContentText,
+    DialogActions,
+    Box,
+    Typography
+} from '@mui/material';
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 
 function AdminLureEdit() {
     const history = useHistory();
     const dispatch = useDispatch();
     const lure = useSelector(store => store.lure.selectedLure);
+
     //success alert states
     const isSuccessful = useSelector(store => store.success.isSuccessful);
     const [dialogText, setDialogText] = useState(``);
     const [open, setOpen] = useState(false);
 
-    const [render, setRender] = useState(false);
-
+    //set initial state for lure input
     const defaultState = {
         id: lure.id,
         name: lure.name,
@@ -37,9 +54,9 @@ function AdminLureEdit() {
     //success alert code block
     useEffect(() => {
         status();
-        setRender(!render)
     }, [isSuccessful]);
 
+    // if isSuccessful is true, change dialogText and open dialog
     const status = () => {
         if (isSuccessful) {
             setDialogText(`${lureInput.name} successfully edited!`)
@@ -47,13 +64,16 @@ function AdminLureEdit() {
         }
     }
 
+    //open dialog
     const handleOpen = () => {
         setOpen(true);
     }
 
+    //close dialog
     const handleClose = () => {
         setOpen(false);
 
+        //if isSuccessful is true, push user to url route and dispatch reset
         if (isSuccessful) {
             history.push(`/admin/lure`);
             dispatch({ type: `RESET_IS_SUCCESSFUL` });
@@ -65,10 +85,12 @@ function AdminLureEdit() {
     return (<>
         {(lure.status === 'empty')
             ? <>
+                {/* if no lure was selected, redirect user back to url route */}
                 <Redirect to="/admin/lure" />
             </>
             :
             <>
+                {/* otherwise, show all below */}
                 <Box sx={{ padding: "1em" }}>
                     <Button
                         startIcon={<ArrowBackOutlinedIcon />}

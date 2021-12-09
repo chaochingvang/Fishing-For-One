@@ -28,6 +28,7 @@ import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 function AdminFishEdit() {
     const history = useHistory();
     const dispatch = useDispatch();
+    //fish is assigned the values from store reducer
     const fish = useSelector(store => store.fish.selectedFish);
 
     //success alert states
@@ -35,6 +36,7 @@ function AdminFishEdit() {
     const [dialogText, setDialogText] = useState(``);
     const [open, setOpen] = useState(false);
 
+    //setting default state of fish with data from reducer
     const defaultState = {
         id: fish.id,
         name: fish.name,
@@ -45,7 +47,7 @@ function AdminFishEdit() {
 
     const [fishInput, setFishInput] = useState(defaultState);
 
-
+    //send edit dispatch when form is submitted
     const handleSubmit = () => {
         console.log(`clicked`);
         dispatch({ type: `EDIT_FISH`, payload: fishInput });
@@ -53,10 +55,12 @@ function AdminFishEdit() {
 
 
     //success alert code block
+    // run on load and when isSuccessful changes
     useEffect(() => {
         status();
     }, [isSuccessful]);
 
+    //changes DialogText and opens Dialog
     const status = () => {
         if (isSuccessful) {
             setDialogText(`${fishInput.name} successfully edited!`)
@@ -64,13 +68,16 @@ function AdminFishEdit() {
         }
     }
 
+    //opens dialog
     const handleOpen = () => {
         setOpen(true);
     }
 
+    //close dialog
     const handleClose = () => {
         setOpen(false);
 
+        //if isSuccessful is true, push user to '/admin/fish' and dispatch reset successful
         if (isSuccessful) {
             history.push(`/admin/fish`);
             dispatch({ type: `RESET_IS_SUCCESSFUL` });
@@ -79,12 +86,14 @@ function AdminFishEdit() {
     //end success alert code block
 
     return (<>
+        {/* If no fish was selected, redirect user back to list of fish */}
         {(fish.status === 'empty')
             ? <>
                 <Redirect to="/admin/fish" />
             </>
             :
             <>
+                {/* If a fish was selected, show below */}
                 <Box sx={{ padding: "1em" }}>
                     <Button
                         startIcon={<ArrowBackOutlinedIcon />}
@@ -149,6 +158,7 @@ function AdminFishEdit() {
                     onClose={handleClose}
                 >
                     <DialogTitle>
+                        {/* ifSuccessful is true, show SUCCESS else ERROR */}
                         {isSuccessful ? <>SUCCESS!</> : <>ERROR!</>}
                     </DialogTitle>
                     <DialogContent>

@@ -3,15 +3,11 @@ import { Button, Box, Typography } from '@mui/material';
 import { useHistory } from 'react-router';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-// This is one of our simplest components
-// It doesn't have local state,
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is'
-
 function AboutPage() {
   const history = useHistory();
   return (<>
-    <Box sx={{padding: "1em"}}>
+    <Box sx={{ padding: "1em" }}>
+      {/* goes back to '/' when btn clicked */}
       <Button
         startIcon={<ArrowBackIcon />}
         variant="contained"

@@ -1,19 +1,30 @@
 import AdminFishItem from "../AdminFishItem/AdminFishItem";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
 
 //mui
-import { TableContainer, Table, TableBody, TableCell, TableHead, TableRow, Button, Box, Typography } from '@mui/material';
-import { useHistory } from "react-router";
+import {
+    TableContainer,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+    Button,
+    Box,
+    Typography
+} from '@mui/material';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 
 
 function AdminFishList() {
+    //fishList is from DB
     const fishList = useSelector(store => store.fish.fishList);
     const history = useHistory();
 
     return (<>
 
-        <Box sx={{margin: "auto", textAlign: "center", paddingTop: "1em"}}>
+        <Box sx={{ margin: "auto", textAlign: "center", paddingTop: "1em" }}>
             <Typography variant="h4">Admin Fish List</Typography>
         </Box>
         <Box sx={{
@@ -46,6 +57,7 @@ function AdminFishList() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
+                    {/* maps over list of fish in fishList array and pass as prop into AdminFishItem component */}
                     {fishList.map((fish) => (
                         <AdminFishItem
                             key={fish.id}

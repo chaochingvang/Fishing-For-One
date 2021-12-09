@@ -1,11 +1,32 @@
-import { useDispatch, useSelector } from 'react-redux';
+import {
+    useState,
+    useEffect
+} from 'react';
+import {
+    useDispatch,
+    useSelector
+} from 'react-redux';
 import { useHistory } from 'react-router';
+import { PickerDropPane } from 'filestack-react';
+
 //mui
-import { Typography, IconButton, Stack, Box, TextField, FormControl, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
-import { useState, useEffect } from 'react';
+import {
+    Typography,
+    IconButton,
+    Stack,
+    Box,
+    TextField,
+    FormControl,
+    Button,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogContentText,
+    DialogActions
+} from '@mui/material';
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
-import { PickerDropPane } from 'filestack-react';
+
 
 
 function AdminFishForm() {
@@ -18,6 +39,7 @@ function AdminFishForm() {
     const [open, setOpen] = useState(false);
     const [openUploader, setOpenUploader] = useState(false);
 
+    //setting default state of fishInput
     const defaultState = {
         name: ``,
         habitat: ``,
@@ -25,12 +47,17 @@ function AdminFishForm() {
         image_url: ``,
     }
 
+    //local state to hold input values
     const [fishInput, setFishInput] = useState(defaultState);
 
+
+    //success alert code block
+    // run on load and when isSuccessful changes
     useEffect(() => {
         status();
     }, [isSuccessful]);
 
+    //changes DialogText and opens Dialog
     const status = () => {
         if (isSuccessful) {
             setDialogText(`${fishInput.name} successfully added!`)
@@ -38,47 +65,57 @@ function AdminFishForm() {
         }
     }
 
+    //open dialog
     const handleOpen = () => {
         setOpen(true);
     }
 
+    //close dialog
     const handleClose = () => {
         setOpen(false);
 
+        //if isSuccessful is true, push user to '/admin/fish' and dispatch reset successful
         if (isSuccessful) {
             history.push(`/admin/fish`);
             dispatch({ type: `RESET_IS_SUCCESSFUL` });
         }
     }
 
+    //when form is submitted
     const handleSubmit = () => {
         console.log(`clicked`);
 
+        //if name is empty, change dialog text and open dialog
         if (fishInput.name === ``) {
             console.log(`no!`);
             setDialogText(`Fish Name field cannot be blank! Please enter a name for the fish.`)
             handleOpen();
         }
+        //else if habitat is empty, change dialog text and open dialog
         else if (fishInput.habitat === ``) {
             console.log(`no!`);
             setDialogText(`Fish habitat description field cannot be blank! Please enter a habitat description for the fish!`)
             handleOpen();
         }
+        //else if feeding pref is empty, change dialog text and open dialog
         else if (fishInput.feeding_preferences === ``) {
             console.log(`no!`);
             setDialogText(`Fish feeding preference field cannot be blank! Please enter a feeding preference for the fish!`)
             handleOpen();
         }
+        //else if fish image url is empty, change dialog text and open dialog
         else if (fishInput.image_url === ``) {
             console.log(`no!`);
             setDialogText(`Image of fish is required! Please enter an image URL for the fish.`)
             handleOpen();
         }
+        //else dispatch add fish with fishInput as payload
         else {
             dispatch({ type: `ADD_FISH`, payload: fishInput });
         }
     }
 
+    //when img done uploading, set image URL to the URL response from uploader and close uploader dialog
     const handleUploadDone = (result) => {
         setFishInput({ ...fishInput, image_url: (result.filesUploaded[0].url) })
         setOpenUploader(false);
@@ -134,7 +171,7 @@ function AdminFishForm() {
                     />
                     <Stack direction="row">
                         <TextField
-                            sx={{width: "100%"}}
+                            sx={{ width: "100%" }}
                             required
                             helperText="Image URL (* required)"
                             placeholder="Image URL"
