@@ -14,8 +14,8 @@ function LoginPage() {
 
         <Typography variant="h3">Fishing For One</Typography>
 
-        <Box sx={{ paddingTop: "2em", paddingBottom: "2em" }}>
-          <img src="/images/fishing.svg" alt="fish_logo" width="100%" />
+        <Box sx={{ paddingTop: "2em", paddingBottom: "2em"}}>
+          <img src="/images/fishing.svg" alt="fish_logo" width="100%"/>
         </Box>
 
         <LoginForm />
@@ -26,7 +26,7 @@ function LoginPage() {
           justifyContent="space-between">
           <Box>
             <Typography
-              variant="caption" >New user? <br />Create an account!</Typography><br />
+              variant="caption">New user? <br />Create an account!</Typography><br />
             <Button
               endIcon={<PersonAddOutlinedIcon />}
               variant="contained"

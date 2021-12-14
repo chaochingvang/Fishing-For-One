@@ -21,7 +21,7 @@ function JournalItem({ journalEntry }) {
     }
 
     return (<>
-        <ImageListItem sx={{margin: '.5em'}}>
+        <Box sx={{border: "1px solid black"}}>
             <Card
                 onClick={() => handleCardClick(journalEntry)}
                 sx={{ border: 'solid black 1px' }}>
@@ -33,8 +33,7 @@ function JournalItem({ journalEntry }) {
                 loading="lazy"
             />
             </Card>
-        </ImageListItem>
-
+        </Box>
     </>)
 }
 
