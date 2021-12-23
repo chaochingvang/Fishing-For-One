@@ -10,11 +10,11 @@ function LoginPage() {
 
   return (
     <div>
-      <Box sx={{ margin: "auto", width: "90%", padding: "1em", textAlign: "center" }}>
+      <Box sx={{ margin: "auto", width: "90%", padding: "1em", textAlign: "center", justifyContent:"center"}}>
 
         <Typography variant="h3">Fishing For One</Typography>
 
-        <Box sx={{ paddingTop: "2em", paddingBottom: "2em"}}>
+        <Box sx={{ paddingTop: "2em", paddingBottom: "2em", margin: "auto"}} maxWidth="50vw">
           <img src="/images/fishing.svg" alt="fish_logo" width="100%"/>
         </Box>
 
