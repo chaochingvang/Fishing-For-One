@@ -14,8 +14,8 @@ function LoginPage() {
 
         <Typography variant="h3">Fishing For One</Typography>
 
-        <Box sx={{ paddingTop: "2em", paddingBottom: "2em", margin: "auto"}} maxWidth="50vw">
-          <img src="/images/fishing.svg" alt="fish_logo" width="100%"/>
+        <Box sx={{margin: "auto"}} maxWidth="50vw">
+          <img src="/images/fishing.svg" alt="fish_logo" width="100%" height="200vh"/>
         </Box>
 
         <LoginForm />

@@ -36,8 +36,8 @@ function JournalDetails() {
                     margin: "auto",
                     padding: "1em"
                 }}>
-                    <Card variant="outlined" >
-                        <img src={journalEntry.image_url} />
+                    <Card variant="outlined" sx={{textAlign: "center"}}>
+                        <img src={journalEntry.image_url} height="250vh"/>
                     </Card>
                     <div className="details">
                         <Box

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 
 import { Box, Typography, TextField, Button, FormControl } from '@mui/material';
+import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
+
 
 function RegisterForm() {
   const errors = useSelector((store) => store.errors);
@@ -116,8 +118,9 @@ function RegisterForm() {
             />
         </div>
             <Button
-              sx={{ width: "50%", margin: "auto" }}
+              sx={{ width: "80%", margin: "auto" }}
               variant="contained"
+              endIcon={<PersonAddOutlinedIcon />}
               type="submit">Register</Button>
         </FormControl>
         </form>

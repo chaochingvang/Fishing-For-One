@@ -21,19 +21,14 @@ function JournalItem({ journalEntry }) {
     }
 
     return (<>
-        <Box sx={{border: "1px solid black"}}>
-            <Card
-                onClick={() => handleCardClick(journalEntry)}
-                sx={{ border: 'solid black 1px' }}>
+        <Card sx={{ border: "solid black 1px" }} onClick={() => handleCardClick(journalEntry)}>
             <img
-                // src={`${journalEntry.image_url}?w=164&h=164&fit=crop&auto=format`}
-                src={`${journalEntry.image_url}`}
-                srcSet={`${journalEntry.image_url}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                alt={journalEntry.image_url}
+                src={`${journalEntry.image_url}?w=248&fit=crop&auto=format`}
+                srcSet={`${journalEntry.image_url}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                alt={journalEntry.title}
                 loading="lazy"
             />
-            </Card>
-        </Box>
+        </Card>
     </>)
 }
 

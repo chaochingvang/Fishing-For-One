@@ -5,6 +5,7 @@ import RegisterForm from '../RegisterForm/RegisterForm';
 import { Box, Button, Typography } from '@mui/material';
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 
+
 function RegisterPage() {
   const history = useHistory();
 
@@ -18,9 +19,9 @@ function RegisterPage() {
 
       <Typography variant="h3">Fishing For One</Typography>
 
-      <Box sx={{ paddingTop: "1em", paddingBottom: "1em" }}>
-        <img src="/images/fishing.svg" alt="fish_logo" width="100%" />
-      </Box> 
+        <Box sx={{ margin: "auto" }} maxWidth="50vw">
+          <img src="/images/fishing.svg" alt="fish_logo" width="100%" height="200vh" />
+        </Box>
 
       <RegisterForm />
       </Box>
