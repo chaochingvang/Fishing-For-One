@@ -129,5 +129,5 @@ Lastly, I would like to thank our friends and families for continuing to support
 
 ## Contacts
 
-Chaoching Vang
+Chaoching Vang<br/>
 <a href="https://www.linkedin.com/in/chaochingvang"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a>  <a href="mailto:chaoching.vang@gmail.com"><img src=https://raw.githubusercontent.com/johnturner4004/readme-generator/master/src/components/assets/images/email_me_button_icon_151852.svg /></a>
